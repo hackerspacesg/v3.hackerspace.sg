@@ -1,7 +1,10 @@
 {
   "name": "hackerspacesg",
   "type": "module",
-  "version": "0.0.1",
+  "version": "3.0.0",
+  "license": "AGPL-3.0-or-later",
+  "private": true,
+  "description": "HackerspaceSG's main website",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -13,5 +16,17 @@
     "astro": "^4.15.4",
     "@astrojs/check": "^0.9.3",
     "typescript": "^5.5.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
