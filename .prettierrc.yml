@@ -1,0 +1,7 @@
+arrowParens: always
+bracketSameLine: true
+printWidth: 80
+plugins:
+- prettier-plugin-astro
+singleQuote: true
+trailingComma: all

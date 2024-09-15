@@ -10,12 +10,14 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint --cache \"src/**/*.{js,jsx,ts,tsx,cjs,mjs,astro}\"",
+    "format": "prettier --config .prettierrc.yml --write \"**/*.{js,jsx,ts,tsx,cjs,mjs,astro,md,mdx,json}\"",
+    "format:diff": "prettier --config .prettierrc.yml --list-different \"**/*.{js,jsx,ts,tsx,cjs,mjs,astro,md,mdx,json}\""
   },
   "dependencies": {
-    "astro": "^4.15.4",
     "@astrojs/check": "^0.9.3",
-    "typescript": "^5.5.4"
+    "astro": "^4.15.4"
   },
   "browserslist": {
     "production": [
@@ -28,5 +30,19 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "@types/eslint__js": "^8.42.3",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-astro": "^1.2.4",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.5.0"
   }
 }
