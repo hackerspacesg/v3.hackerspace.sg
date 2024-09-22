@@ -8,9 +8,11 @@ import tailwindcss from 'tailwindcss';
 import tailwindcssNesting from 'tailwindcss/nesting';
 import autoprefixer from 'autoprefixer';
 
+import mdx from '@astrojs/mdx';
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react()],
+  integrations: [react(), mdx()],
   vite: {
     css: {
       postcss: {
