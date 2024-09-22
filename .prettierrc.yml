@@ -3,5 +3,6 @@ bracketSameLine: true
 printWidth: 80
 plugins:
 - prettier-plugin-astro
+- prettier-plugin-tailwindcss
 singleQuote: true
 trailingComma: all
