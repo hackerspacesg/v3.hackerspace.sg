@@ -1,12 +1,16 @@
 ---
 import '@/styles/globals.css';
 import Head from '@/layouts/LayoutHead.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
 ---
 
 <!doctype html>
 <html lang="en" class="2xl:text-[1vw]">
   <Head />
   <body class="touch-manipulation">
+    <Header />
     <slot />
+    <Footer />
   </body>
 </html>
