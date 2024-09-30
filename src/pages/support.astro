@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SupportUs from '@/components/support/chart';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+const costs = [
+  { label: 'Rent', value: 2500, color: 'rgb(255, 99, 132)' },
+  { label: 'Accounting', value: 60, color: 'rgb(54, 162, 235)' },
+  { label: 'Utilities', value: 250, color: 'rgb(255, 206, 86)' },
+];
+
+const total = costs.reduce((sum, cost) => sum + cost.value, 0);
+
+const benefits = [
+  'Access to exclusive events and workshops',
+  'Recognition on our website and social media',
+  'Priority booking for space and equipment',
+  'Invitations to supporter-only meetups',
+  'Opportunity to shape the future of HackerspaceSG',
+];
+---
+
+<Layout title="Support HackerspaceSG">
+  <main>
+    <section class="bg-red-600 py-20 text-white">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="mb-4 text-4xl font-bold md:text-5xl">
+          Support HackerspaceSG
+        </h1>
+        <p class="mb-8 text-xl">
+          Help us keep the lights on and the innovation flowing!
+        </p>
+        <Button asChild>
+          <a href="#support-us" class="bg-white text-red-600 hover:bg-gray-100"
+            >Become a Supporter</a
+          >
+        </Button>
+      </div>
+    </section>
+
+    <SupportUs />
+
+    <section id="support-us" class="bg-white py-20 dark:bg-gray-800">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="mb-8 text-3xl font-bold dark:text-white">
+          Become a Supporter
+        </h2>
+        <p class="mx-auto mb-8 max-w-2xl text-xl dark:text-gray-300">
+          Your support helps us maintain our space, upgrade equipment, and
+          continue fostering innovation in Singapore's tech community.
+        </p>
+        <Card className="mx-auto mb-8 max-w-2xl">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold"
+              >Supporter Benefits</CardTitle
+            >
+          </CardHeader>
+          <CardContent>
+            <ul class="space-y-2 text-left">
+              {
+                benefits.map((benefit) => (
+                  <li class="flex items-start">
+                    <span class="mr-2 text-green-500">✓</span>
+                    <span class="dark:text-gray-300">{benefit}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </CardContent>
+        </Card>
+        <Button asChild>
+          <a
+            href="https://docs.google.com/forms/d/e/your-google-form-id/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-red-600 text-white hover:bg-red-700">
+            Become a Supporter Now
+          </a>
+        </Button>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  // Add any client-side JavaScript here if needed
+</script>
