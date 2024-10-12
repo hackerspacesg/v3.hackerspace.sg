@@ -1,0 +1,112 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Button } from "@/components/ui/button"
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout title="Volunteer - HackerspaceSG">
+  <div class="min-h-screen bg-gradient-to-b from-red-100 to-red-200 text-gray-800 font-sans">
+    {/* Hero Section */}
+    <section class="py-20 px-4">
+      <div class="container mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 text-red-600">
+          Hack for Good
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+          Join our volunteer program and get unlimited access to HackerspaceSG while making a difference in the tech community.
+        </p>
+      </div>
+    </section>
+
+    {/* Volunteer Program Details */}
+    <section class="py-20 px-4 bg-white">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center text-red-600">Volunteer Program</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div class="bg-red-50 p-6 rounded-lg shadow-md">
+            <h3 class="text-2xl font-semibold mb-4 flex items-center text-red-600">
+              <Icon name="fa:clock-o" class="w-6 h-6 mr-2" />
+              Time Commitment
+            </h3>
+            <p class="mb-4">
+              Volunteer for 16 hours a week and enjoy free, unlimited membership (equivalent to $256/month).
+            </p>
+          </div>
+          <div class="bg-red-50 p-6 rounded-lg shadow-md">
+            <h3 class="text-2xl font-semibold mb-4 flex items-center text-red-600">
+              <Icon name="fa:wrench" class="w-6 h-6 mr-2" />
+              Responsibilities
+            </h3>
+            <p class="mb-4">
+              Help maintain the space, assist with events, contribute to projects, and support the HackerspaceSG community.
+            </p>
+          </div>
+          <div class="bg-red-50 p-6 rounded-lg shadow-md">
+            <h3 class="text-2xl font-semibold mb-4 flex items-center text-red-600">
+              <Icon name="fa:users" class="w-6 h-6 mr-2" />
+              Community Impact
+            </h3>
+            <p class="mb-4">
+              Make a real difference in Singapore's tech scene while developing your skills and network.
+            </p>
+          </div>
+          <div class="bg-red-50 p-6 rounded-lg shadow-md">
+            <h3 class="text-2xl font-semibold mb-4 flex items-center text-red-600">
+              <Icon name="fa:bolt" class="w-6 h-6 mr-2" />
+              Benefits
+            </h3>
+            <p class="mb-4">
+              Gain unlimited access to the space, tools, and resources. Participate in exclusive events and workshops.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* How to Apply */}
+    <section class="py-20 px-4 bg-red-50">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center text-red-600">How to Apply</h2>
+        <div class="max-w-3xl mx-auto space-y-6">
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <p class="text-xl flex items-center">
+              <Icon name="fa:chevron-right" class="w-6 h-6 mr-2 text-red-500" />
+              Fill out the volunteer application form with your details and areas of interest.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <p class="text-xl flex items-center">
+              <Icon name="fa:chevron-right" class="w-6 h-6 mr-2 text-red-500" />
+              Attend a brief interview with our volunteer coordinator to discuss your skills and availability.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <p class="text-xl flex items-center">
+              <Icon name="fa:chevron-right" class="w-6 h-6 mr-2 text-red-500" />
+              Complete a short onboarding process to familiarize yourself with our space and procedures.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <p class="text-xl flex items-center">
+              <Icon name="fa:chevron-right" class="w-6 h-6 mr-2 text-red-500" />
+              Start your volunteer journey and become an integral part of the HackerspaceSG community!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Apply Now Section */}
+    <section class="py-20 px-4 bg-white">
+      <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-8 text-red-600">Ready to Hack for Good?</h2>
+        <p class="text-xl mb-8 max-w-2xl mx-auto">
+          Join our volunteer program today and help shape the future of technology in Singapore while enjoying unlimited access to HackerspaceSG.
+        </p>
+        <Button class="bg-red-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-red-700 transition-colors">
+          Apply Now
+        </Button>
+      </div>
+    </section>
+  </div>
+</Layout>

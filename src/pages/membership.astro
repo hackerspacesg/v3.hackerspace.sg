@@ -1,0 +1,164 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+
+const plans = [
+  {
+    name: 'Basic',
+    price: '$365/year',
+    description: 'Perfect for occasional visitors',
+    features: [true, true, false, false, false],
+  },
+  {
+    name: 'Starter',
+    price: '$64/month',
+    description: 'Great for regular members',
+    features: [true, true, true, false, false],
+  },
+  {
+    name: 'Pro',
+    price: '$128/month',
+    description: 'Ideal for frequent users',
+    features: [true, true, true, true, false],
+  },
+  {
+    name: 'Advanced',
+    price: '$256/month',
+    description: 'Best for power users',
+    features: [true, true, true, true, true],
+  },
+  {
+    name: 'Enterprise',
+    price: '$512/month',
+    description: 'Tailored for teams',
+    features: [true, true, true, true, true],
+  },
+];
+
+const features = [
+  'Access to common areas',
+  'Wi-Fi and printing',
+  '24/7 access',
+  'Private storage',
+  'Dedicated workspace',
+];
+---
+
+<Layout title="Membership">
+  <section class="w-full bg-white py-12 dark:bg-gray-800 md:py-24 lg:py-32">
+    <div class="container mx-auto px-4 md:px-6">
+      <h1
+        class="mb-8 text-center text-3xl font-bold tracking-tighter text-red-600 dark:text-red-400 sm:text-5xl">
+        Membership Options
+      </h1>
+      <p
+        class="mx-auto mb-12 max-w-2xl text-center text-xl text-gray-600 dark:text-gray-300">
+        Join our vibrant community of makers, hackers, and innovators. Choose
+        the membership plan that suits your needs and start creating today!
+      </p>
+      <div class="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
+        {
+          plans.slice(0, 3).map((plan) => (
+            <div class="rounded-lg bg-gray-50 p-6 shadow-md dark:bg-gray-700">
+              <h3 class="mb-2 text-2xl font-bold text-red-600 dark:text-red-400">
+                {plan.name}
+              </h3>
+              <p class="mb-4 text-3xl font-bold">{plan.price}</p>
+              <p class="mb-6 text-gray-600 dark:text-gray-300">
+                {plan.description}
+              </p>
+              <button class="w-full rounded bg-red-600 px-4 py-2 font-semibold text-white hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800">
+                Choose {plan.name}
+              </button>
+            </div>
+          ))
+        }
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse text-gray-700 dark:text-gray-300">
+          <thead>
+            <tr class="bg-gray-200 dark:bg-gray-700">
+              <th class="p-4 text-left">Features</th>
+              {
+                plans.map((plan) => (
+                  <th class="p-4 text-center">{plan.name}</th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              features.map((feature, featureIndex) => (
+                <tr class="border-b dark:border-gray-700">
+                  <td class="p-4">{feature}</td>
+                  {plans.map((plan) => (
+                    <td class="p-4 text-center">
+                      {plan.features[featureIndex] ? (
+                        <Icon
+                          name="lucide:check"
+                          class="inline-block text-green-500"
+                        />
+                      ) : (
+                        <Icon
+                          name="lucide:x"
+                          class="inline-block text-red-500"
+                        />
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            }
+            <tr>
+              <td class="p-4 font-bold">Price</td>
+              {
+                plans.map((plan) => (
+                  <td class="p-4 text-center font-bold">{plan.price}</td>
+                ))
+              }
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section
+    id="contact"
+    class="w-full bg-gray-200 py-12 dark:bg-gray-900 md:py-24 lg:py-32">
+    <div class="container mx-auto px-4 md:px-6">
+      <h2
+        class="mb-12 text-center text-3xl font-bold tracking-tighter text-red-600 dark:text-red-400 sm:text-5xl">
+        Contact Us
+      </h2>
+      <div class="mx-auto max-w-md">
+        <form class="space-y-4">
+          <input
+            type="text"
+            placeholder="Name"
+            class="w-full rounded-lg border bg-white px-3 py-2 text-gray-700 focus:border-red-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            class="w-full rounded-lg border bg-white px-3 py-2 text-gray-700 focus:border-red-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+          />
+          <input
+            type="text"
+            placeholder="Subject"
+            class="w-full rounded-lg border bg-white px-3 py-2 text-gray-700 focus:border-red-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+          />
+          <textarea
+            placeholder="Message"
+            class="h-32 w-full rounded-lg border bg-white px-3 py-2 text-gray-700 focus:border-red-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+          ></textarea>
+          <button
+            type="submit"
+            class="w-full rounded-lg bg-red-600 px-4 py-2 font-semibold text-white shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75 dark:bg-red-700 dark:hover:bg-red-800">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>
