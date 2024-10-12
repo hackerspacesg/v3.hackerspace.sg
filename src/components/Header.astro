@@ -1,0 +1,115 @@
+---
+import * as config from '@/config.ts';
+import { Button } from '@/components/ui/button';
+---
+
+<header class="sticky top-0 z-50 bg-zinc-800 text-white">
+  <div class="flex w-screen flex-col md:flex-row">
+    <div class="flex basis-full justify-between md:justify-normal">
+      <a href="/" class="flex">
+        <picture class="h-12 w-12 md:h-16 md:w-16">
+          <source type="image/svg+xml" srcset="/img/hackerspacesg.svg" />
+          <source
+            srcset="/img/hackerspacesg.png, /img/hackerspacesg@2x.png 2x"
+          />
+          <img
+            src="/img/hackerspacesg.png"
+            width="64"
+            height="64"
+            alt={config.site.title}
+            class="h-full w-full"
+          />
+        </picture>
+      </a>
+      <a
+        href="/"
+        class="flex basis-full items-center justify-center md:mx-2 md:basis-0">
+        <span class="mx-4 font-mono text-xl font-bold">{config.site.title}</span
+        ></a
+      >
+      <button
+        id="menuToggle"
+        class="ml-auto mr-4 text-white transition-colors hover:text-red-600 md:hidden"
+        aria-label="Toggle menu">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+      <div
+        class="flex basis-0 items-center justify-between md:ml-2 md:basis-full">
+        <nav class="hidden gap-5 md:flex">
+          {
+            config.header.navbar.map((navlink) => (
+              <a
+                href={navlink.href}
+                class="whitespace-nowrap font-medium underline-offset-4 hover:underline">
+                {navlink.label}
+              </a>
+            ))
+          }
+        </nav>
+
+        <Button asChild
+          ><a
+            href={config.header.navcta.href}
+            class="mr-4 hidden rounded-lg bg-red-600 px-4 py-2 font-semibold text-white shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75 md:inline-block"
+            >{config.header.navcta.label}</a
+          ></Button
+        >
+      </div>
+    </div>
+
+    <nav id="mobileMenu" class="hidden bg-zinc-700 md:hidden">
+      <div class="mx-auto flex flex-col items-center px-4 py-4">
+        {
+          config.header.navbar.map((navlink) => (
+            <a
+              href={navlink.href}
+              class="my-4 block w-full whitespace-nowrap text-center text-lg underline-offset-4 hover:underline">
+              {navlink.label}
+            </a>
+          ))
+        }
+        <Button asChild
+          ><a
+            href={config.header.navcta.href}
+            class="my-4 rounded-lg bg-red-600 px-4 py-2 text-lg font-semibold text-white shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75"
+            >{config.header.navcta.label}</a
+          ></Button
+        >
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuIcon = menuToggle?.querySelector('svg');
+
+  menuToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+
+    if (menuIcon) {
+      if (mobileMenu?.classList.contains('hidden')) {
+        menuIcon.innerHTML = `
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          `;
+      } else {
+        menuIcon.innerHTML = `
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          `;
+      }
+    }
+  });
+</script>

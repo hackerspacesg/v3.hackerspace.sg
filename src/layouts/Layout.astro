@@ -7,12 +7,16 @@ export interface Props {
 }
 
 const { title } = Astro.props;
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
 ---
 
 <!doctype html>
 <html lang="en" class="2xl:text-[1vw]">
   <Head title={title} />
   <body class="touch-manipulation">
+    <Header />
     <slot />
+    <Footer />
   </body>
 </html>
