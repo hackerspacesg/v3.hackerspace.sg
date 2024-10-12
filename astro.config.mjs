@@ -14,10 +14,12 @@ import icon from 'astro-icon';
 
 import sitemap from '@astrojs/sitemap';
 
+import critters from 'astro-critters';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://hackerspace.sg',
-  integrations: [react(), mdx(), icon(), sitemap()],
+  integrations: [react(), mdx(), icon(), sitemap(), critters({})],
   vite: {
     css: {
       postcss: {
