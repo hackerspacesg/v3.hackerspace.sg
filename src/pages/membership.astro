@@ -1,0 +1,460 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '../layouts/Layout.astro';
+
+const membershipData = {
+  title: 'Join Us!',
+  description:
+    'Join our vibrant community of makers, hackers, and innovators. Choose the membership plan that suits your needs and start creating today!',
+  mainTiers: [
+    {
+      name: 'Community',
+      price: '$128/month',
+      annualPrice: '$1,408/year', // 11 months (1 month free)
+      hours: '18 hours/week',
+      suitableFor:
+        "Perfect for part-time makers and those new to the hackerspace community. Ideal if you're looking for occasional workspace access and want to be part of our vibrant ecosystem.",
+      features: [
+        'Access to common areas during allocated hours',
+        'Participation in community events',
+        'Basic tool access',
+        '2-month minimum commitment',
+        '50% discount on Desk Passes ($8/day)',
+        '44L of storage included',
+      ],
+    },
+    {
+      name: 'Co-working',
+      price: '$256/month',
+      annualPrice: '$2,560/year', // 10 months (2 months free)
+      hours: 'Unlimited',
+      suitableFor:
+        'Great for freelancers, remote workers, and regular makers who need a reliable workspace. This tier offers the flexibility to use the space as your primary work location.',
+      features: [
+        '24/7 access to common areas',
+        'Priority booking for meeting rooms',
+        'Extended tool access',
+        '50% discount on Desk Passes ($8/day)',
+        '88L of storage included',
+        'Free Tiny locker (21cm)',
+        'Free Business Address',
+      ],
+    },
+    {
+      name: 'Dedicated',
+      price: '$512/month',
+      annualPrice: '$4,608/year', // 9 months (3 months free)
+      hours: 'Unlimited',
+      suitableFor:
+        'Ideal for startups, small teams, or power users who need a permanent workspace. This tier provides the most comprehensive access to our facilities and resources.',
+      features: [
+        'Permanent dedicated workspace',
+        'Full access to all tools and equipment',
+        '50% discount on Desk Passes ($8/day)',
+        '176L of storage included',
+        'Free Small locker (28cm)',
+        'Free Business Address',
+      ],
+    },
+  ],
+  featureMatrix: [
+    {
+      feature: 'Access to common areas',
+      community: true,
+      coworking: true,
+      dedicated: true,
+    },
+    {
+      feature: 'Wi-Fi and printing',
+      community: true,
+      coworking: true,
+      dedicated: true,
+    },
+    {
+      feature: '24/7 access',
+      community: true,
+      coworking: true,
+      dedicated: true,
+    },
+    {
+      feature: 'Storage included',
+      community: '44L',
+      coworking: '88L',
+      dedicated: '176L',
+    },
+    {
+      feature: 'Locker included',
+      community: '❌',
+      coworking: 'Tiny (21cm)',
+      dedicated: 'Small (28cm)',
+    },
+    {
+      feature: 'Business Address',
+      community: '❌',
+      coworking: '✅',
+      dedicated: '✅',
+    },
+    {
+      feature: 'Dedicated workspace',
+      community: false,
+      coworking: false,
+      dedicated: true,
+    },
+    {
+      feature: 'Hours per week',
+      community: '18',
+      coworking: 'Unlimited',
+      dedicated: 'Unlimited',
+    },
+    {
+      feature: 'Monthly price',
+      community: '$128',
+      coworking: '$256',
+      dedicated: '$512',
+    },
+    {
+      feature: 'Annual price',
+      community: '$1,408',
+      coworking: '$2,560',
+      dedicated: '$4,608',
+    },
+    {
+      feature: 'Desk Pass discount',
+      community: '50%',
+      coworking: '50%',
+      dedicated: '50%',
+    },
+    {
+      feature: 'Minimum commitment',
+      community: '2 months',
+      coworking: '1 month',
+      dedicated: '1 month',
+    },
+  ],
+  addOns: [
+    { name: 'Storage', price: '$5 per 22L' },
+    { name: 'Large Locker (42cm)', price: '$15/month' },
+    { name: 'Small Locker (28cm)', price: '$10/month' },
+    { name: 'Tiny Locker (21cm)', price: '$7.50/month' },
+    { name: 'Business Address', price: '$10/month' },
+  ],
+};
+---
+
+<Layout title={membershipData.title}>
+  <section class="w-full bg-white py-8 dark:bg-gray-800">
+    <div class="container mx-auto px-4 md:px-6">
+      <h1
+        class="mb-8 text-center text-3xl font-bold tracking-tighter text-red-600 dark:text-red-400 sm:text-5xl">
+        {membershipData.title}
+      </h1>
+      <p
+        class="mx-auto mb-12 max-w-2xl text-center text-xl text-gray-600 dark:text-gray-300">
+        {membershipData.description}
+      </p>
+
+      {/* Main Tiers */}
+      <div class="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {
+          membershipData.mainTiers.map((tier) => (
+            <div class="rounded-lg bg-gray-50 p-6 shadow-md dark:bg-gray-700">
+              <h3 class="mb-2 text-2xl font-bold text-red-600 dark:text-red-400">
+                {tier.name}
+              </h3>
+              <p class="mb-1 text-3xl font-bold">{tier.price}</p>
+              <p class="mb-4 text-sm text-gray-600 dark:text-gray-300">
+                Annual: {tier.annualPrice}
+              </p>
+              <p class="mb-4 text-gray-600 dark:text-gray-300">
+                {tier.hours}
+                {tier.hours === 'Unlimited' && (
+                  <sup>
+                    <a href="#unlimited-hours-faq">*</a>
+                  </sup>
+                )}
+              </p>
+              <p class="mb-4 text-sm text-gray-600 dark:text-gray-300">
+                {tier.suitableFor}
+              </p>
+              <ul class="mb-6 space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                {tier.features.map((feature) => (
+                  <li class="flex items-center">
+                    <Icon name="fa:check" class="mr-2 h-4 w-4 text-green-500" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="https://docs.hackerspace.sg/handbook/membership"
+                class="block w-full rounded bg-red-600 px-4 py-2 text-center font-semibold text-white hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800">
+                Choose {tier.name}
+              </a>
+            </div>
+          ))
+        }
+      </div>
+
+      {/* Concessionary and Supporter Tiers */}
+      <div class="mb-12 space-y-6">
+        <div>
+          <h3 class="mb-2 text-xl font-bold text-red-600 dark:text-red-400">
+            Concessionary Tier
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            Available for individuals earning under $2,500/month. The
+            Concessionary tier is priced at $64/month and includes 9 hours/week
+            access, participation in community events, basic tool access, and
+            22L of storage. Proof of eligibility may be required. 50% discount
+            on Desk Passes ($8/day) is also included.
+          </p>
+        </div>
+        <div>
+          <h3 class="mb-2 text-xl font-bold text-red-600 dark:text-red-400">
+            Supporter Tier
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            For those who want to support our community and occasionally use the
+            space. The Supporter tier is priced at $365/year and includes 4
+            hours/week access, participation in community events, and
+            recognition as a HackerspaceSG supporter. 50% discount on Desk
+            Passes ($8/day) is also included.
+          </p>
+        </div>
+      </div>
+
+      {/* Feature Matrix */}
+      <div class="mb-12 overflow-x-auto">
+        <table class="w-full border-collapse text-gray-700 dark:text-gray-300">
+          <thead>
+            <tr class="bg-gray-200 dark:bg-gray-700">
+              <th class="p-4 text-left">Features</th>
+              <th class="p-4 text-center">Community</th>
+              <th class="p-4 text-center">Co-working</th>
+              <th class="p-4 text-center">Dedicated</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              membershipData.featureMatrix.map((row) => (
+                <tr class="border-b dark:border-gray-700">
+                  <td class="p-4">{row.feature}</td>
+                  <td class="p-4 text-center">
+                    {typeof row.community === 'boolean'
+                      ? row.community
+                        ? '✅'
+                        : '❌'
+                      : row.community}
+                    {row.feature === 'Hours per week' &&
+                      row.community === 'Unlimited' && (
+                        <sup>
+                          <a href="#unlimited-hours-faq">*</a>
+                        </sup>
+                      )}
+                  </td>
+                  <td class="p-4 text-center">
+                    {typeof row.coworking === 'boolean'
+                      ? row.coworking
+                        ? '✅'
+                        : '❌'
+                      : row.coworking}
+                    {row.feature === 'Hours per week' &&
+                      row.coworking === 'Unlimited' && (
+                        <sup>
+                          <a href="#unlimited-hours-faq">*</a>
+                        </sup>
+                      )}
+                  </td>
+                  <td class="p-4 text-center">
+                    {typeof row.dedicated === 'boolean'
+                      ? row.dedicated
+                        ? '✅'
+                        : '❌'
+                      : row.dedicated}
+                    {row.feature === 'Hours per week' &&
+                      row.dedicated === 'Unlimited' && (
+                        <sup>
+                          <a href="#unlimited-hours-faq">*</a>
+                        </sup>
+                      )}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      {/* Add-ons */}
+      <div class="mb-12">
+        <h2 class="mb-6 text-2xl font-bold text-red-600 dark:text-red-400">
+          Add-ons
+        </h2>
+        <ul class="space-y-2">
+          {
+            membershipData.addOns.map((addOn) => (
+              <li class="flex justify-between">
+                <span>{addOn.name}</span>
+                <span>{addOn.price}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      {/* How to Sign Up Section */}
+      <div class="mb-12">
+        <h2 class="mb-6 text-2xl font-bold text-red-600 dark:text-red-400">
+          How to Sign Up
+        </h2>
+        <ol class="list-decimal space-y-4 pl-6">
+          {
+            [
+              'Choose your preferred membership tier from the options above.',
+              'Click on the "Choose [Tier Name]" button for your selected tier.',
+              'Fill out the membership application form with your personal details and contact information.',
+              'Read and agree to our terms of service and community guidelines.',
+              'Submit your application and wait for our team to review it.',
+              "Once approved, you'll receive an email with further instructions on how to complete your registration and make your first payment.",
+              'Welcome to HackerspaceSG! You can now start using our facilities and participating in our community events.',
+            ].map((step, index) => <li class="pl-2">{step}</li>)
+          }
+        </ol>
+      </div>
+
+      {/* FAQ Section */}
+      <div class="mb-12">
+        <h2 class="mb-6 text-2xl font-bold text-red-600 dark:text-red-400">
+          Frequently Asked Questions
+        </h2>
+        <div class="space-y-6">
+          <div>
+            <h3 class="mb-2 text-xl font-semibold">
+              What is included in the membership?
+            </h3>
+            <p>
+              Your membership includes access to our shared workspace,
+              high-speed internet, printing facilities, and participation in
+              community events. Depending on your tier, you may also have
+              dedicated workspace, storage options, lockers, and a business
+              address.
+            </p>
+          </div>
+          <div>
+            <h3 class="mb-2 text-xl font-semibold">
+              Can I upgrade or downgrade my membership?
+            </h3>
+            <p>
+              Yes, you can change your membership tier at any time. Changes will
+              take effect at the start of the next billing cycle.
+            </p>
+          </div>
+          <div>
+            <h3 class="mb-2 text-xl font-semibold">
+              Is there a minimum commitment period?
+            </h3>
+            <p>
+              The Community plan has a 2-month minimum commitment. Other plans
+              offer flexible month-to-month memberships with no long-term
+              commitments required, except for the Supporter tier which is an
+              annual commitment.
+            </p>
+          </div>
+          <div>
+            <h3 class="mb-2 text-xl font-semibold">
+              What are the requirements for the Concessionary tier?
+            </h3>
+            <p>
+              The Concessionary tier is available for individuals earning under
+              $2,500/month. Proof of eligibility may be required.
+            </p>
+          </div>
+          <div>
+            <h3 class="mb-2 text-xl font-semibold">
+              How do I book meeting rooms or event spaces?
+            </h3>
+            <p>
+              Members can book meeting rooms and event spaces through our online
+              booking system. Availability and any additional fees will be
+              displayed in the booking interface.
+            </p>
+          </div>
+          <div id="unlimited-hours-faq">
+            <h3 class="mb-2 text-xl font-semibold">
+              What does "Unlimited" hours mean?
+            </h3>
+            <p>
+              Unlimited hours means you have 24/7 access to the space. However,
+              it's important to note that this doesn't mean you are allowed to
+              live out of the space. We're not licensed to provide
+              accommodation. Seriously, don't do it.
+            </p>
+          </div>
+          <div>
+            <h3 class="mb-2 text-xl font-semibold">What is a Desk Pass?</h3>
+            <p>
+              A Desk Pass allows you to use the space for a day without
+              committing to a monthly membership. All membership tiers offer a
+              50% discount on Desk Passes, making them $8/day instead of the
+              regular $16/day.
+            </p>
+          </div>
+          <div>
+            <h3 class="mb-2 text-xl font-semibold">
+              Are there discounts for annual payments?
+            </h3>
+            <p>
+              Yes, we offer discounts for annual payments on our main tiers:
+              <ul class="mt-2 list-disc pl-6">
+                <li>Community tier: 1 month free (pay for 11 months)</li>
+
+                <li>Co-working tier: 2 months free (pay for 10 months)</li>
+                <li>Dedicated tier: 3 months free (pay for 9 months)</li>
+              </ul>
+            </p>
+          </div>
+          <div>
+            <h3 class="mb-2 text-xl font-semibold">
+              Can I add more storage or a larger locker to my membership?
+            </h3>
+            <p>
+              Yes, you can add extra storage space or upgrade your locker size
+              for an additional fee. Check the Add-ons section for pricing
+              details.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Refund Policy */}
+      <div>
+        <h2 class="mb-6 text-2xl font-bold text-red-600 dark:text-red-400">
+          Refund Policy
+        </h2>
+        <p class="mb-4">
+          We understand that circumstances can change. If you decide to switch
+          from annual payment terms to monthly, we offer a prorated refund based
+          on the following policy:
+        </p>
+        <ul class="list-disc space-y-2 pl-6">
+          <li>
+            The refund will be calculated as if you were originally paying
+            monthly.
+          </li>
+          <li>
+            We will deduct the monthly rate for each month you've used,
+            including the current month.
+          </li>
+          <li>The remaining balance will be refunded to you.</li>
+          <li>
+            Please note that switching to monthly payments may result in a
+            higher overall cost for the remaining period.
+          </li>
+        </ul>
+        <p class="mt-4">
+          To request a refund or change your payment terms, please contact our
+          membership team.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
