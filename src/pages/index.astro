@@ -3,6 +3,8 @@ import Layout from '@/layouts/Layout.astro';
 import Hero from '@/components/index/Hero.astro';
 import Photos from '@/components/index/Photos.astro';
 import Announce from '@/components/index/Announce.astro';
+import UpcomingEvents from '@/components/index/UpcomingEvents.astro';
+import RecentTweets from '@/components/index/RecentTweets.astro';
 ---
 
 <Layout
@@ -10,4 +12,16 @@ import Announce from '@/components/index/Announce.astro';
   <Hero />
   <Photos />
   <Announce />
+  <section id="EventsTweets" class="bg-zinc-50 py-4 dark:bg-gray-900">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <UpcomingEvents />
+        <div
+          class="hidden md:inline"
+          title="If our tweets aren't showing, Twitter's widget is broken. 😱">
+          <RecentTweets />
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
