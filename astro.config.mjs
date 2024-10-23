@@ -16,10 +16,15 @@ import sitemap from '@astrojs/sitemap';
 
 import critters from 'astro-critters';
 
+import remarkCustomHeaderId from 'remark-custom-header-id';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://hackerspace.sg',
   integrations: [react(), mdx(), icon(), sitemap(), critters({})],
+  markdown: {
+    remarkPlugins: [remarkCustomHeaderId],
+  },
   vite: {
     css: {
       postcss: {
