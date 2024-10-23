@@ -1,0 +1,88 @@
+---
+import { Icon } from 'astro-icon/components';
+import * as config from '@/config.ts';
+---
+
+<footer class="w-full shrink-0 bg-zinc-800 px-4 py-6 text-white md:px-6">
+  <div class="flex flex-col justify-around md:flex-row">
+    <nav class="mx-auto my-1 w-44 md:hidden" aria-label={config.site.title}>
+      <h2 class="my-4 text-2xl font-semibold text-gray-50">
+        {config.site.title}
+      </h2>
+      <ul>
+        <li class="my-4">
+          <a href="/" class="hover:text-red-500" aria-label="Home">
+            <Icon
+              name="fa:home"
+              class="mr-2 inline-block h-5 w-5"
+              title="Home"
+            />
+            <span class="text-gray-50">Home</span>
+          </a>
+        </li>
+        {
+          config.header.navbar.map((link) => (
+            <li class="my-4">
+              <a
+                href={link.href}
+                class="hover:text-red-500"
+                aria-label={link.label}>
+                <Icon
+                  name={link.icon}
+                  class="mr-2 inline-block h-5 w-5"
+                  title={link.label}
+                />
+                <span class="text-gray-50">{link.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    {
+      config.footer.cols.map((col) => (
+        <nav class="mx-auto my-1 w-44" aria-label={col.heading}>
+          <h2 class="my-4 text-2xl font-semibold text-gray-50">
+            {col.heading}
+          </h2>
+          <ul>
+            {col.links.map((link) => (
+              <li class="my-4">
+                <a
+                  href={link.href}
+                  class="hover:text-red-500"
+                  aria-label={link.label}>
+                  <Icon
+                    name={link.icon}
+                    class="mr-2 inline-block h-5 w-5"
+                    title={link.label}
+                  />
+                  <span class="text-gray-50">{link.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))
+    }
+  </div>
+  <div class="mt-8 border-t border-zinc-700 pt-8 text-center">
+    <p class="my-1 text-gray-300" set:html={config.footer.copyright} />
+    <p class="mt-1 text-sm text-gray-400">{config.footer.madein}</p>
+    <nav class="gap-5">
+      {
+        config.footer.links.map((link) => (
+          <a
+            href={link.href}
+            class="whitespace-nowrap text-sm text-gray-400 underline-offset-4 hover:underline">
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div
+      class="my-2 inline-block animate-pulse rounded-full bg-zinc-700 px-4 py-2 text-xs">
+      {config.footer.oldschool}
+    </div>
+  </div>
+</footer>
