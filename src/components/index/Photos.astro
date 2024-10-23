@@ -1,0 +1,56 @@
+---
+import Carousel from '@/components/index/Carousel';
+import { type CarouselSlide } from '@/components/index/Carousel';
+
+import { getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
+import type { ImageMetadata } from 'astro';
+
+interface CarouselImage {
+  src: ImageMetadata;
+  title: string;
+}
+
+const images = await getCollection(
+  'IndexCarousel',
+  ({ id }: { id: string }) => {
+    return id == 'carousel';
+  },
+);
+
+const slides: CarouselSlide[] = await Promise.all(
+  images[0].data.map(async (img: CarouselImage) => {
+    const img1x = await getImage({
+      src: img.src,
+      height: 256,
+      format: 'jpg',
+      quality: 'mid',
+    });
+
+    const img2x = await getImage({
+      src: img.src,
+      height: 512,
+      format: 'webp',
+      quality: 'mid',
+    });
+
+    const img3x = await getImage({
+      src: img.src,
+      height: 1024,
+      format: 'webp',
+      quality: 'mid',
+    });
+
+    return {
+      title: img.title,
+      default: img.src,
+      img1x,
+      img2x,
+      img3x,
+    };
+  }),
+);
+---
+
+<Carousel client:load {slides} />
