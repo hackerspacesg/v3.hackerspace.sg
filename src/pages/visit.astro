@@ -1,0 +1,37 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Main from '@/content/visit/main.md';
+import SeeAlso from '@/content/visit/see-also.md';
+---
+
+<Layout
+  title="Visiting"
+  description="Getting to HackerspaceSG at Textile Centre.">
+  <section class="prose mx-8 my-8 md:mx-auto">
+    <Main />
+  </section>
+  <section>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!4v1734986723583!6m8!1m7!1s5OgzLJcaY7j5Az3HiL3iJw!2m2!1d1.303687170855885!2d103.8611084283218!3f76.11246710213092!4f6.615566512788661!5f0.7820865974627469"
+      width="100%"
+      height="400"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      class="prose mx-auto mb-4"></iframe>
+  </section>
+  <section>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7856727429867!2d103.8611571757014!3d1.30360647121696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19da4af0ae35%3A0xc2afaaf7a0d87e0f!2sTextile%20Centre!5e0!3m2!1sen!2ssg!4v1734986196318!5m2!1sen!2ssg"
+      width="100%"
+      height="400"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </section>
+  <section class="prose mx-8 my-8 md:mx-auto">
+    <SeeAlso />
+  </section>
+</Layout>

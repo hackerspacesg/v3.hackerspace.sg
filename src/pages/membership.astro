@@ -1,0 +1,371 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '@/layouts/Layout.astro';
+import FAQ from '@/content/faq/membership.md';
+import OtherTiers from '@/content/membership/othertiers.md';
+import Signup from '@/content/membership/signup.md';
+import Refund from '@/content/membership/refund.md';
+
+const membershipData = {
+  title: 'Membership',
+  heading: 'Join Us!',
+  description:
+    'Get started on your maker journey by joining our community today! 🚀',
+  features: [
+    {
+      icon: 'lucide:clock',
+      title: '24/7 Access',
+      description:
+        'Round-the-clock access to the space for all your projects and ideas.',
+    },
+    {
+      icon: 'lucide:monitor',
+      title: 'Desks with Monitors',
+      description:
+        'Be your most productive, with an external monitor on most desks.',
+    },
+    {
+      icon: 'lucide:archive',
+      title: 'Storage',
+      description:
+        'Keep your stuff in your storage box, or subscribe to a locker for your valuables.',
+    },
+    {
+      icon: 'lucide:pocket-knife',
+      title: 'Workbench & Tools',
+      description:
+        'Use our electronics workbench and hardware tools for your projects.',
+    },
+    {
+      icon: 'lucide:users',
+      title: 'Meeting Room',
+      description:
+        'Book our meeting room for video calls, collaborative work, or in-person meetings.',
+    },
+    {
+      icon: 'lucide:presentation',
+      title: 'Host Events',
+      description:
+        'Organise community meetups, workshops, and other events at the space.',
+    },
+    {
+      icon: 'lucide:router',
+      title: 'Lab @ HSG',
+      description:
+        'Keep your equipment powered on and running for long-term projects or experiments.*',
+    },
+    {
+      icon: 'lucide:waypoints',
+      title: 'VPN Access',
+      description: 'Access our network securely from anywhere in the world.*',
+    },
+  ],
+  mainTiers: [
+    {
+      name: 'Community',
+      price: '$128/month',
+      annualPrice: '$1,408/year (1 month free)',
+      hours: '18 hours/week',
+      suitableFor:
+        'Great for occasional co-workers; people who come in after work or school to hang out.',
+      features: [
+        '44L of shelf storage included',
+        '2 hours/month meeting room booking credits',
+        '50% off desk passes for guests',
+      ],
+    },
+    {
+      name: 'Co-working',
+      price: '$256/month',
+      annualPrice: '$2,560/year (2 months free)',
+      hours: 'Unlimited hours',
+      suitableFor:
+        'Ideal for freelancers, remote workers, and small companies using the space daily.',
+      features: [
+        '88L of shelf storage included',
+        'Free Tiny Locker (21cm)',
+        'Free Business Address',
+        '4 hours/month meeting room booking credits',
+        '50% off desk passes for guests',
+      ],
+    },
+    {
+      name: 'Dedicated',
+      price: '$512/month',
+      annualPrice: '$4,608/year (3 months free)',
+      hours: 'Unlimited hours',
+      suitableFor:
+        'For people who really want to support the space, who have lots of stuff, or love their multi-monitor setups.',
+      features: [
+        'Your own dedicated desk',
+        '176L of shelf storage included',
+        'Free Small Locker (28cm)',
+        'Free Business Address',
+        '8 hours/month meeting room booking credits',
+        '50% off desk passes for guests',
+      ],
+    },
+  ],
+  featureMatrix: [
+    {
+      feature: '24/7 access',
+      community: true,
+      coworking: true,
+      dedicated: true,
+    },
+    {
+      feature: 'Hours per week',
+      community: '18',
+      coworking: 'Unlimited',
+      dedicated: 'Unlimited',
+    },
+    {
+      feature: 'Dedicated desk',
+      community: false,
+      coworking: false,
+      dedicated: true,
+    },
+    {
+      feature: 'Storage included',
+      community: '44L',
+      coworking: '88L',
+      dedicated: '176L',
+    },
+    {
+      feature: 'Locker included',
+      community: '❌',
+      coworking: 'Tiny (21cm)',
+      dedicated: 'Small (28cm)',
+    },
+    {
+      feature: 'Business address',
+      community: '$10/month',
+      coworking: '✅',
+      dedicated: '✅',
+    },
+    {
+      feature: 'Meeting room booking credits',
+      community: '4 hours/month',
+      coworking: '8 hours/month',
+      dedicated: '16 hours/month',
+    },
+    {
+      feature: 'Minimum commitment',
+      community: '2 months',
+      coworking: '1 month',
+      dedicated: '1 month',
+    },
+    {
+      feature: 'Monthly price',
+      community: '$128',
+      coworking: '$256',
+      dedicated: '$512',
+    },
+    {
+      feature: 'Annual price',
+      community: '$1,408',
+      coworking: '$2,560',
+      dedicated: '$4,608',
+    },
+  ],
+  addOns: [
+    { name: 'Shelf Storage', price: '$5 per 22L per month' },
+    { name: 'Large Locker (42cm)', price: '$15 per month' },
+    { name: 'Small Locker (28cm)', price: '$10 per month' },
+    { name: 'Tiny Locker (21cm)', price: '$7.50 per month' },
+    { name: 'Business Address', price: '$10 per business per month' },
+  ],
+};
+---
+
+<Layout title={membershipData.title} description={membershipData.description}>
+  <section class="w-full bg-white py-8 dark:bg-gray-800">
+    <div class="container mx-auto px-4 md:px-6">
+      <h1
+        class="mb-8 text-center text-3xl font-bold tracking-tighter text-red-600 dark:text-red-400 sm:text-5xl">
+        {membershipData.heading}
+      </h1>
+      <p
+        class="mx-auto mb-12 max-w-2xl text-center text-xl text-gray-600 dark:text-gray-300">
+        {membershipData.description}
+      </p>
+
+      <div
+        class="mb-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {
+          membershipData.features.map((feature) => (
+            <div class="flex flex-col items-center rounded-lg bg-gray-50 p-6 text-center shadow-md dark:bg-gray-700">
+              <Icon
+                name={feature.icon}
+                class="mb-4 h-12 w-12 text-red-600 dark:text-red-400"
+              />
+              <h3 class="mb-2 text-xl font-bold text-gray-800 dark:text-gray-200">
+                {feature.title}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                {feature.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {
+          membershipData.mainTiers.map((tier) => (
+            <div class="flex flex-col rounded-lg bg-gray-50 p-6 shadow-md dark:bg-gray-700">
+              <h3 class="mb-2 text-2xl font-bold text-red-600 dark:text-red-400">
+                {tier.name}
+              </h3>
+              <p class="mb-1 text-3xl font-bold">{tier.price}</p>
+              <p class="mb-4 text-sm text-gray-600 dark:text-gray-300">
+                Annual: {tier.annualPrice}
+              </p>
+              <p class="mb-4 text-gray-600 dark:text-gray-300">
+                {tier.hours}
+                {tier.hours === 'Unlimited hours' && (
+                  <sup>
+                    <a href="#unlimited">*</a>
+                  </sup>
+                )}
+              </p>
+              <p class="mb-4 text-sm text-gray-600 dark:text-gray-300">
+                {tier.suitableFor}
+              </p>
+              <ul class="mb-6 flex-grow space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                {tier.features.map((feature) => (
+                  <li class="flex items-center">
+                    <Icon name="fa:check" class="mr-2 h-4 w-4 text-green-500" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="https://docs.hackerspace.sg/handbook/membership"
+                class="mt-auto block w-full rounded bg-red-600 px-4 py-2 text-center font-semibold text-white hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800">
+                Choose {tier.name}
+              </a>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mx-auto mb-12 max-w-3xl space-y-6">
+        <div class="prose prose-sm max-w-none">
+          <OtherTiers />
+        </div>
+      </div>
+
+      <div class="mb-12 overflow-x-auto">
+        <table
+          class="mx-auto w-full max-w-3xl border-collapse text-gray-700 dark:text-gray-300">
+          <thead>
+            <tr class="bg-gray-200 dark:bg-gray-700">
+              <th class="p-4 text-left">Features</th>
+              <th class="p-4 text-center">Community</th>
+              <th class="p-4 text-center">Co-working</th>
+              <th class="p-4 text-center">Dedicated</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              membershipData.featureMatrix.map((row) => (
+                <tr class="border-b dark:border-gray-700">
+                  <td class="p-4">{row.feature}</td>
+                  <td class="p-4 text-center">
+                    {typeof row.community === 'boolean'
+                      ? row.community
+                        ? '✅'
+                        : '❌'
+                      : row.community}
+                    {row.feature === 'Hours per week' &&
+                      row.community === 'Unlimited' && (
+                        <sup>
+                          <a href="#unlimited">*</a>
+                        </sup>
+                      )}
+                  </td>
+                  <td class="p-4 text-center">
+                    {typeof row.coworking === 'boolean'
+                      ? row.coworking
+                        ? '✅'
+                        : '❌'
+                      : row.coworking}
+                    {row.feature === 'Hours per week' &&
+                      row.coworking === 'Unlimited' && (
+                        <sup>
+                          <a href="#unlimited">*</a>
+                        </sup>
+                      )}
+                  </td>
+                  <td class="p-4 text-center">
+                    {typeof row.dedicated === 'boolean'
+                      ? row.dedicated
+                        ? '✅'
+                        : '❌'
+                      : row.dedicated}
+                    {row.feature === 'Hours per week' &&
+                      row.dedicated === 'Unlimited' && (
+                        <sup>
+                          <a href="#unlimited">*</a>
+                        </sup>
+                      )}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mx-auto mb-12 max-w-2xl" id="addons">
+        <h2
+          class="mb-6 text-2xl font-bold text-red-600 dark:text-red-400"
+          id="addons">
+          Add-ons
+        </h2>
+        <ul class="space-y-2">
+          {
+            membershipData.addOns.map((addOn) => (
+              <li class="flex justify-between">
+                <span set:html={addOn.name} />
+                <span>{addOn.price}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="mx-auto mb-12 max-w-2xl" id="signup">
+        <h2
+          class="mb-6 text-2xl font-bold text-red-600 dark:text-red-400"
+          id="signup">
+          How to Sign Up
+        </h2>
+        <div class="prose">
+          <Signup />
+        </div>
+      </div>
+
+      <div class="mx-auto mb-12 max-w-2xl">
+        <h2 class="mb-6 text-2xl font-bold text-red-600 dark:text-red-400" id="faq">
+          Frequently Asked Questions
+        </h2>
+        <div class="prose space-y-6">
+          <FAQ />
+        </div>
+      </div>
+
+      <div class="mx-auto max-w-2xl" id="refund">
+        <h2
+          class="mb-6 text-2xl font-bold text-red-600 dark:text-red-400"
+          id="refunds">
+          Proration and Refund Policy
+        </h2>
+        <div class="prose">
+          <Refund />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
