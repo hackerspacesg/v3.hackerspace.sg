@@ -1,26 +1,34 @@
 # Cloudflare Pages redirect documentation is available here:
 # https://developers.cloudflare.com/pages/configuration/redirects/
 
+# Redirects from HackerspaceSG v2 pages
+
+/calendar* /events 301
+/cupcake* https://docs.hackerspace.sg 301
+/DevBoards* https://docs.hackerspace.sg 301
+/location* /visit/#location 301
+/membership/MembershipAgreement.pdf https://docs.hackerspace.sg/handbook/membership 301
+
 # Redirects from HackerspaceSG v1 pages
 
-/calendar/hackerspacesg-events /calendar 301
-/calendar/geektechdevdesign-events /calendar 301
-/calendar/rojak-calendar /calendar 301
+/calendar/hackerspacesg-events/ /events 301
+/calendar/geektechdevdesign-events/ /events 301
+/calendar/rojak-calendar/ /events 301
 /readme-txt/membership/ /membership 301
-/readme-txt/donations/ /membership 301
+/readme-txt/donations/ /support 301
 /about-us/ /about 301
-/social/location/ /location 301
-/chat https://web.libera.chat/#hackerspacesg 302
+/social/location/ /visit 301
+/chat* https://web.libera.chat/#hackerspacesg 302
 
 # Redirect to docs.hackerspace.sg
 
-/connect https://docs.hackerspace.sg/handbook/connect 301
-/terms https://docs.hackerspace.sg/handbook/terms 301
-/rules https://docs.hackerspace.sg/handbook/rules 301
+/connect* https://docs.hackerspace.sg/handbook/connect 301
+/terms* https://docs.hackerspace.sg/handbook/terms 301
+/rules* https://docs.hackerspace.sg/handbook/rules 301
 
 # Miscellaneous redirects
 
-/365 https://docs.google.com/forms/d/e/1FAIpQLScMdzbi1KTmkBiMlcqvdgAVizlMN6b2UuhmoHCiQHAzRK89qg/viewform 302 
+/365* https://docs.google.com/forms/d/e/1FAIpQLScMdzbi1KTmkBiMlcqvdgAVizlMN6b2UuhmoHCiQHAzRK89qg/viewform 302 
 
 # Dynamic redirects need to come last
 
