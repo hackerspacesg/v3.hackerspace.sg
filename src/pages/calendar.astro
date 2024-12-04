@@ -1,0 +1,20 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Main from '@/content/calendar/main.md';
+---
+
+<Layout
+  title="Calendar"
+  description="Tech and maker community events at HackerspaceSG.">
+  <section class="prose mx-8 my-8 md:mx-auto">
+    <Main />
+  </section>
+  <section id="google-calendar" class="mx-auto">
+    <div class="mx-8 max-w-4xl">
+      <iframe
+        src="https://www.google.com/calendar/embed?height=650&wkst=1&bgcolor=%23FFFFFF&src=mengwong%40hackerspace.sg&color=%232952A3&ctz=Asia%2FSingapore"
+        class="w-full"
+        height="650"></iframe>
+    </div>
+  </section>
+</Layout>
