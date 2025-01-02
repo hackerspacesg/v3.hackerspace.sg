@@ -7,6 +7,7 @@
 /DevBoards* https://docs.hackerspace.sg 301
 /events/eoy2015* https://v2.hackerspace.sg/events/eoy2015/ 302
 /events* https://v2.hackerspace.sg/events/ 302
+/location* /visit/#location 301
 /membership/MembershipAgreement.pdf https://docs.hackerspace.sg/handbook/membership 301
 
 # Redirects from HackerspaceSG v1 pages
@@ -17,7 +18,7 @@
 /readme-txt/membership/ /membership 301
 /readme-txt/donations/ /membership 301
 /about-us/ /about 301
-/social/location/ /location 301
+/social/location/ /visit 301
 /chat* https://web.libera.chat/#hackerspacesg 302
 
 # Redirect to docs.hackerspace.sg
