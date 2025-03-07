@@ -7,8 +7,8 @@ export const site = {
 export const header = {
   navbar: [
     { label: 'About', href: '/about', icon: 'fa:info-circle' },
+    { label: 'Visit', href: '/visit', icon: 'fa:map-marker' },
     { label: 'Membership', href: '/membership', icon: 'fa:users' },
-    { label: 'Location', href: '/location', icon: 'fa:map-marker' },
     { label: 'Calendar', href: '/calendar', icon: 'fa:calendar' },
   ],
   navcta: { label: 'Join Us', href: '/membership', icon: 'lucide:user-plus' },
