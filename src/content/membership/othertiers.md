@@ -4,7 +4,7 @@ We have a Concessionary tier for individuals earning under $2,500/month, such as
 
 The Concessionary tier is priced at $64/month, and includes 9 hours/week access and 22L of storage. We may ask for proof of eligibility.
 
-If you prefer to trade labour for membership, we have a [Volunteer scheme](/volunteer).
+If you prefer to trade labour for membership, we also have a [Volunteer scheme](/volunteer).
 
 ### Supporter Tier
 
