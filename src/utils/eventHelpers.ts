@@ -1,24 +1,33 @@
 import { formatDistanceToNow } from 'date-fns';
-import { categoryMap } from '@/config.index';
+import { parseICS } from './iCalParser';
+import { categoryMap, iCalUrl, eventLogos, eventEmoji } from '@/config.events';
 
-export function formatSGTDateTime(date: Date) {
-  const dateString = new Date(
-    date.toLocaleString('en-US', { timeZone: 'Asia/Singapore' }),
-  ).toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
+export interface CalendarEvent {
+  summary: string;
+  start: Date;
+  end: Date;
+  description?: string;
+  url?: string;
+}
 
-  const timeString = new Date(
-    date.toLocaleString('en-US', { timeZone: 'Asia/Singapore' }),
-  ).toLocaleTimeString('en-US', {
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-  });
+export async function fetchEvents(): Promise<CalendarEvent[]> {
+  try {
+    const res = await fetch(iCalUrl);
+    if (res.ok) {
+      const icalData = await res.text();
+      return parseICS(icalData);
+    }
+    console.error('Failed to fetch ical file.');
+    return [];
+  } catch (error) {
+    console.error('Error fetching or parsing the ical file:', error);
+    return [];
+  }
+}
 
-  return `${dateString}, ${timeString} SGT`;
+export function extractEventUrl(description?: string): string | null {
+  const urlMatch = description?.match(/URL:\s*(https?:\/\/[^\s]+)/i);
+  return urlMatch ? urlMatch[1] : null;
 }
 
 export function isTentative(title: string): boolean {
@@ -33,7 +42,26 @@ function findCategoryMatch(text: string | undefined): string | undefined {
   );
 }
 
-export function getEmoji(
+export function getEventLogo(summary: string): string | null {
+  for (const [key, logoPath] of Object.entries(eventLogos)) {
+    if (summary.toLowerCase().includes(key.toLowerCase())) {
+      return logoPath;
+    }
+  }
+  return null;
+}
+
+export function getEventEmoji(summary: string): string | null {
+  for (const [key, emoji] of Object.entries(eventEmoji)) {
+    const regex = new RegExp(`\\b${key}\\b`, 'i');
+    if (regex.test(summary)) {
+      return emoji;
+    }
+  }
+  return null;
+}
+
+export function getCategoryEmoji(
   summary: string,
   description: string | undefined,
 ): string {
@@ -56,7 +84,12 @@ export function getEmoji(
     matchedCategory = findCategoryMatch(description);
   }
 
-  return matchedCategory ? categoryMap[matchedCategory] || '' : '';
+  if (matchedCategory && categoryMap[matchedCategory]) {
+    return categoryMap[matchedCategory];
+  }
+
+  const emoji = getEventEmoji(summary);
+  return emoji || '';
 }
 
 export function updateRelativeTimes() {

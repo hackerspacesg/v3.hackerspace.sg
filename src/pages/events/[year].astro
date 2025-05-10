@@ -1,0 +1,48 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PastEvents from '@/components/events/PastEvents.astro';
+import { fetchEvents } from '@/utils/eventHelpers.ts';
+import { excludedEventNames } from '@/config.events.ts';
+
+export async function getStaticPaths() {
+  const allEvents = await fetchEvents();
+  const events = allEvents
+    .filter(
+      (event) =>
+        event.start < new Date() &&
+        !excludedEventNames.some((name: string) =>
+          event.summary.toLowerCase().includes(name.toLowerCase()),
+        ),
+    )
+    .sort((a, b) => b.start.getTime() - a.start.getTime());
+
+  const years = [
+    ...new Set(events.map((event) => new Date(event.start).getFullYear())),
+  ].sort((a, b) => a - b);
+
+  if (years.length === 0) {
+    years.push(new Date().getFullYear());
+  }
+
+  return years.map((year) => ({
+    params: { year: year.toString() },
+    props: { currentYear: year, allYears: years },
+  }));
+}
+
+const { currentYear, allYears } = Astro.props;
+---
+
+<Layout
+  title={`Events in ${currentYear}`}
+  description={`Past events at HackerspaceSG in ${currentYear}`}>
+  >
+  <main class="container mx-auto px-4 py-8">
+    <div class="prose mx-auto mb-8 dark:prose-invert">
+      <h1>
+        Past Events in {currentYear}
+      </h1>
+    </div>
+    <PastEvents currentYear={currentYear} allYears={allYears} />
+  </main>
+</Layout>

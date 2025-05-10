@@ -1,0 +1,106 @@
+---
+import { fetchEvents, type CalendarEvent } from '@/utils/eventHelpers';
+import { isWholeDay } from '@/utils/dateUtils';
+import { excludedEventNames } from '@/config.events';
+import EventCard from './EventCard.astro';
+
+interface Props {
+  currentYear: number;
+  allYears: number[];
+}
+
+const { currentYear, allYears } = Astro.props;
+
+const allEvents = await fetchEvents();
+const events = allEvents
+  .filter((event) => {
+    const eventYear = new Date(event.start).getFullYear();
+    return (
+      eventYear === currentYear &&
+      event.start < new Date() &&
+      !isWholeDay(event.start, event.end) &&
+      !excludedEventNames.some((name: string) =>
+        event.summary.toLowerCase().includes(name.toLowerCase()),
+      )
+    );
+  })
+  .sort((a, b) => a.start.getTime() - b.start.getTime());
+
+const eventsByMonth = events.reduce(
+  (acc, event) => {
+    const month = event.start.toLocaleString('en-US', { month: 'long' });
+    if (!acc[month]) {
+      acc[month] = [];
+    }
+    acc[month].push(event);
+    return acc;
+  },
+  {} as Record<string, CalendarEvent[]>,
+);
+
+const months = Object.keys(eventsByMonth).sort((a, b) => {
+  const monthA = new Date(Date.parse(`${a} 1, ${currentYear}`));
+  const monthB = new Date(Date.parse(`${b} 1, ${currentYear}`));
+  return monthA.getTime() - monthB.getTime();
+});
+---
+
+<div class="mx-auto">
+  <div class="mx-auto">
+    <div class="sticky top-12 z-10 md:top-16">
+      <nav
+        class="mx-auto hidden max-w-3xl flex-wrap justify-center gap-2 bg-white/80 px-4 py-4 backdrop-blur-sm dark:bg-zinc-900/80 md:px-8 lg:flex">
+        {
+          allYears.map((year) => (
+            <a
+              href={`/events/${year}`}
+              class={`rounded-lg px-4 py-2 ${
+                year === currentYear
+                  ? 'bg-red-600 text-white hover:bg-red-700'
+                  : 'text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700'
+              }`}>
+              {year}
+            </a>
+          ))
+        }
+      </nav>
+      <div
+        class="block bg-white/80 px-4 py-4 backdrop-blur-sm dark:bg-zinc-900/80 lg:hidden">
+        <select
+          class="w-full rounded-lg border border-zinc-300 bg-white px-4 py-2 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
+          onchange="if(this.value) window.location.href=this.value">
+          {
+            [...allYears].reverse().map((year) => (
+              <option value={`/events/${year}`} selected={year === currentYear}>
+                {year}
+              </option>
+            ))
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="mx-auto mt-12 max-w-2xl">
+      <div class="space-y-10">
+        {
+          months.map((month) => (
+            <section class="scroll-mt-44" id={month.toLowerCase()}>
+              <h2 class="text-2xl font-bold text-zinc-800 dark:text-zinc-100">
+                <a
+                  href={`#${month.toLowerCase()}`}
+                  class="hover:text-red-600 dark:hover:text-red-400">
+                  {month}
+                </a>
+              </h2>
+              <div class="space-y-4">
+                {eventsByMonth[month].map((event) => (
+                  <EventCard event={event} variant="past" />
+                ))}
+              </div>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>
