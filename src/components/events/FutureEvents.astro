@@ -1,0 +1,40 @@
+---
+import { fetchEvents } from '@/utils/eventHelpers';
+import EventCard from '@/components/events/EventCard.astro';
+
+const allEvents = await fetchEvents();
+const thirtyDaysFromNow = new Date();
+thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
+
+const futureEvents = allEvents
+  .filter((event) => event.start > new Date())
+  .sort((a, b) => a.start.getTime() - b.start.getTime());
+
+if (futureEvents.length === 0) return;
+
+const upcomingEvents = futureEvents.filter(
+  (event) => event.start <= thirtyDaysFromNow,
+);
+
+const eventsToShow =
+  upcomingEvents.length > 0 ? upcomingEvents : futureEvents.slice(0, 5);
+---
+
+<h2
+  class="mb-4 flex items-center text-2xl font-bold text-zinc-800 dark:text-zinc-100"
+  id="upcoming">
+  Upcoming Events
+</h2>
+<ul class="not-prose space-y-4" id="event-list">
+  {eventsToShow.map((event) => <EventCard event={event} variant="upcoming" />)}
+</ul>
+
+<script>
+  import { updateRelativeTimes } from '@/utils/eventHelpers.ts';
+
+  if (typeof window !== 'undefined') {
+    updateRelativeTimes();
+    setInterval(updateRelativeTimes, 60000);
+    document.addEventListener('astro:after-swap', updateRelativeTimes);
+  }
+</script>

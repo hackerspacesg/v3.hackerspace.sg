@@ -1,0 +1,36 @@
+---
+import { type CalendarEvent } from '@/utils/eventHelpers';
+import EventCard from './EventCard.astro';
+
+interface Props {
+  months: string[];
+  eventsByMonth: Record<string, { short: string; items: CalendarEvent[] }>;
+}
+
+const { months, eventsByMonth } = Astro.props;
+---
+
+<div class="relative mx-auto max-w-2xl pt-8">
+  <div class="space-y-8">
+    {
+      months.map((month) => (
+        <section
+          class="scroll-mt-32"
+          id={eventsByMonth[month].short.toLowerCase()}>
+          <h2 class="text-2xl font-bold text-zinc-800 dark:text-zinc-100">
+            <a
+              href={`#${eventsByMonth[month].short.toLowerCase()}`}
+              class="hover:text-red-600 dark:hover:text-red-400">
+              {month}
+            </a>
+          </h2>
+          <div class="space-y-3">
+            {eventsByMonth[month].items.map((event) => (
+              <EventCard event={event} variant="past" />
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+</div>

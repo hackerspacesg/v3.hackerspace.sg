@@ -1,0 +1,128 @@
+---
+/// <reference types="astro" />
+import type { CalendarEvent } from '@/utils/eventHelpers';
+import {
+  extractEventUrl,
+  isTentative,
+  getCategoryEmoji,
+  getEventLogo,
+  getEventEmoji,
+  shouldNoFollow,
+} from '@/utils/eventHelpers';
+import {
+  formatDateYYYYMMDD,
+  formatSGTDateTime,
+  formatSGTTime,
+  getDayAbbreviation,
+} from '@/utils/dateUtils';
+
+export interface Props {
+  event: CalendarEvent;
+  variant?: 'upcoming' | 'past';
+}
+
+const { event, variant = 'past' } = Astro.props;
+const eventUrl = extractEventUrl(event.description);
+const isEventTentative = isTentative(event.summary);
+const categoryEmoji = getCategoryEmoji(event.summary, event.description);
+const logo = getEventLogo(event.summary);
+const emoji = getEventEmoji(event.summary);
+const formattedSGT = formatSGTDateTime(new Date(event.start));
+---
+
+{
+  variant === 'upcoming' && (
+    <li
+      class={`flex items-center rounded-lg p-4 shadow-md transition ${
+        isEventTentative
+          ? 'opacity-50'
+          : 'bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-700 dark:hover:bg-zinc-600'
+      }`}>
+      <div class="w-24 flex-shrink-0 text-center">
+        <div>
+          <div class="text-xs text-zinc-600 dark:text-zinc-400">
+            {getDayAbbreviation(event.start)}
+          </div>
+          <div class="text-lg font-bold text-zinc-800 dark:text-zinc-200">
+            {formatSGTDateTime(event.start, 'short')}
+          </div>
+        </div>
+        {!event.allDay && (
+          <div class="text-sm text-zinc-600 dark:text-zinc-400">
+            {formatSGTTime(event.start)}
+          </div>
+        )}
+      </div>
+      <div class="ml-4 flex-grow">
+        <h3 class="text-lg font-semibold dark:text-white">
+          {eventUrl ? (
+            <a
+              href={eventUrl}
+              target="_blank"
+              rel={shouldNoFollow(eventUrl) ? 'nofollow' : undefined}
+              class="text-blue-500 hover:underline">
+              {`${event.summary} ${categoryEmoji}`}
+            </a>
+          ) : (
+            <>{`${event.summary} ${categoryEmoji}`}</>
+          )}
+        </h3>
+        <p
+          class="event-relative-time mt-1 text-sm text-zinc-600 dark:text-zinc-400"
+          data-start-time={event.start.toISOString()}
+          title={formattedSGT}
+        />
+      </div>
+    </li>
+  )
+}
+
+{
+  variant === 'past' && (
+    <div
+      id={formatDateYYYYMMDD(event.start)}
+      class="flex items-start rounded-lg bg-white p-6 shadow-md dark:bg-zinc-800">
+      <div class="mr-4 w-24 flex-shrink-0">
+        {logo ? (
+          <img
+            src={logo}
+            alt={`${event.summary} logo`}
+            class="h-24 w-full object-contain"
+          />
+        ) : (
+          <div class="flex h-24 w-full items-center justify-center bg-zinc-100 text-3xl font-bold text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300">
+            {emoji || new Date(event.start).getDate()}
+          </div>
+        )}
+      </div>
+      <div class="flex-grow space-y-3">
+        <div class="space-y-0">
+          <div class="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+            <span class="pr-1 text-xs text-zinc-400">
+              {getDayAbbreviation(event.start)}
+            </span>
+            {`${formatSGTDateTime(event.start, 'full')}`}
+          </div>
+          {!event.allDay && (
+            <div class="text-sm text-zinc-500 dark:text-zinc-500">
+              {`${formatSGTTime(event.start)} – ${formatSGTTime(event.end)}`}
+            </div>
+          )}
+        </div>
+        <h3 class="text-xl font-semibold dark:text-white">
+          {eventUrl ? (
+            <a
+              href={eventUrl}
+              target="_blank"
+              rel={shouldNoFollow(eventUrl) ? 'nofollow' : undefined}
+              class="text-blue-500 hover:underline">
+              {event.summary}
+            </a>
+          ) : (
+            event.summary
+          )}
+        </h3>
+      </div>
+    </div>
+  )
+}

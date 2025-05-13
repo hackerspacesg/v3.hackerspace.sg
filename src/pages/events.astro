@@ -1,12 +1,23 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Main from '@/content/events/main.md';
+import FutureEvents from '@/components/events/FutureEvents.astro';
+
+import { getStaticPaths } from './events/[year].astro';
+
+const paths = await getStaticPaths();
+const years = paths
+  .map((path) => parseInt(path.params.year))
+  .sort((a, b) => b - a);
+const latestYear = years[0];
 ---
 
 <Layout
   title="Events Calendar"
   description="Tech and maker community events at HackerspaceSG.">
   <section class="prose mx-8 my-8 md:mx-auto">
+    <h1>Events Calendar</h1>
+    <FutureEvents />
     <Main />
   </section>
   <section id="google-calendar" class="w-full">
@@ -17,5 +28,13 @@ import Main from '@/content/events/main.md';
         height="650"
         class="px-8"></iframe>
     </div>
+  </section>
+  <section class="prose m-8 md:mx-auto">
+    <h2>Past Events</h2>
+    <p>
+      Check out what we've hosted at HackerspaceSG before in our <a
+        href=`/events/${latestYear}`>Events Archive</a
+      >!
+    </p>
   </section>
 </Layout>

@@ -1,0 +1,73 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PastEvents from '@/components/events/PastEvents.astro';
+import VerticalYearMonthNav from '@/components/ui/verticalYearMonthNav.astro';
+import MobileYearMonthSelect from '@/components/ui/mobileYearMonthSelect.astro';
+import { fetchEvents, filterPastEvents } from '@/utils/eventHelpers.ts';
+import { transformToMonthlyData } from '@/utils/dateUtils';
+
+export async function getStaticPaths() {
+  const allEvents = await fetchEvents();
+  const events = filterPastEvents(allEvents);
+
+  const years = [
+    ...new Set(events.map((event) => new Date(event.start).getFullYear())),
+  ].sort((a, b) => a - b);
+
+  if (years.length === 0) {
+    years.push(new Date().getFullYear());
+  }
+
+  return years.map((year) => ({
+    params: { year: year.toString() },
+    props: { currentYear: year, allYears: years },
+  }));
+}
+
+const { currentYear, allYears } = Astro.props;
+
+const allEvents = await fetchEvents();
+const events = filterPastEvents(allEvents, currentYear);
+
+const { months, itemsByMonth } = transformToMonthlyData(
+  events,
+  (event) => event.start,
+);
+---
+
+<Layout
+  title={`Events in ${currentYear}`}
+  description={`Past events at HackerspaceSG in ${currentYear}`}>
+  <main class="container mx-auto px-4 py-8 lg:px-0">
+    <div class="flex flex-col lg:flex-row">
+      <div class="basis-1/5"></div>
+      <div class="flex-1">
+        <div class="prose mx-auto mb-8 dark:prose-invert">
+          <h1>
+            Past Events in {currentYear}
+          </h1>
+        </div>
+
+        <div class="relative mx-auto">
+          <MobileYearMonthSelect
+            allYears={allYears}
+            currentYear={currentYear}
+            months={months}
+            itemsByMonth={itemsByMonth}
+          />
+
+          <PastEvents months={months} eventsByMonth={itemsByMonth} />
+        </div>
+      </div>
+
+      <div class="ml-8">
+        <VerticalYearMonthNav
+          allYears={allYears}
+          currentYear={currentYear}
+          months={months}
+          itemsByMonth={itemsByMonth}
+        />
+      </div>
+    </div>
+  </main>
+</Layout>
