@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import MentionList from '@/components/mentions/MentionList.astro';
+import Breadcrumbs from '@/components/mentions/Breadcrumbs.astro';
+import type { Crumb } from '@/components/mentions/Breadcrumbs.astro';
+
+export async function getStaticPaths() {
+  const mentions = await getCollection('mentionExcerpts');
+  const years = [
+    ...new Set(mentions.map((mention) => mention.data.date.getFullYear())),
+  ];
+
+  return years.map((year) => ({
+    params: { year: year.toString() },
+    props: {
+      year,
+      mentions: mentions
+        .filter((m) => m.data.date.getFullYear() === year)
+        .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+    },
+  }));
+}
+
+const { year, mentions } = Astro.props;
+
+const crumbs: Crumb[] = [
+  { label: 'Media Mentions', href: '/mentions' },
+  { label: year.toString() },
+];
+
+const title = `Mentions in ${year}`;
+const description = `Press mentions and media coverage of HackerspaceSG from ${year}`;
+const heading = `Media Mentions in <span class="text-red-800 dark:text-red-400">${year}</span>`;
+---
+
+<Layout {title} {description}>
+  <div class="prose mx-8 my-8 md:mx-auto">
+    <Breadcrumbs {crumbs} />
+    <MentionList
+      {title}
+      {description}
+      {heading}
+      {mentions}
+      allLanguages={true}
+      showYear={false}
+    />
+  </div>
+</Layout>

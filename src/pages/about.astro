@@ -2,6 +2,13 @@
 import Layout from '@/layouts/Layout.astro';
 import Intro from '@/content/about/intro.md';
 import Facilities from '@/content/about/facilities.md';
+import Mentions from '@/components/about/Mentions.astro';
+import { getCollection } from 'astro:content';
+
+const mentions = await getCollection('mentionExcerpts');
+const recentMentions = mentions
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 6);
 ---
 
 <Layout
@@ -11,4 +18,14 @@ import Facilities from '@/content/about/facilities.md';
     <Intro />
     <Facilities />
   </section>
+  <div class="prose mx-8 my-8 md:mx-auto">
+    <h2 class="mb-6 text-2xl font-bold">
+      <a
+        href="/mentions"
+        class="text-red-700 no-underline hover:text-red-600 dark:text-red-400"
+        >Featured in the Media</a
+      >
+    </h2>
+  </div>
+  <Mentions mentions={recentMentions} />
 </Layout>

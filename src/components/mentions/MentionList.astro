@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import MentionCard from './MentionCard.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  mentions: CollectionEntry<'mentions' | 'mentionExcerpts'>[];
+  heading?: string;
+  showYear?: boolean;
+  allLanguages?: boolean;
+}
+
+const {
+  mentions,
+  heading,
+  showYear = true,
+  allLanguages = false,
+} = Astro.props;
+
+const filteredMentions = allLanguages ? mentions : mentions.filter((mention) => !mention.data.language);
+---
+
+<section>
+  <h1 set:html={heading} />
+  <div class="space-y-8">
+    {
+      filteredMentions.map((mention) => (
+        <MentionCard mention={mention} {showYear} />
+      ))
+    }
+  </div>
+</section>
