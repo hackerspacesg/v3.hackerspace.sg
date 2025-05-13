@@ -1,0 +1,176 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '@/layouts/Layout.astro';
+
+const volunteerData = {
+  title: 'Volunteer',
+  heading: 'Volunteer with Us!',
+  description: 'Help keep HackerspaceSG welcoming and accessible while getting 24/7 access to the space 🌟',
+  generalFeatures: [
+    {
+      icon: 'lucide:clock',
+      title: '24/7 Access',
+      description: 'Get unlimited access to HackerspaceSG, same as a Co-working membership.',
+    },
+    {
+      icon: 'lucide:users',
+      title: 'Community',
+      description: 'Be more involved in the space and help make it welcoming for everyone.',
+    },
+    {
+      icon: 'lucide:calendar',
+      title: 'Flexible Shifts',
+      description: 'Work on your own projects while keeping an eye on things during shifts.',
+    },
+    {
+      icon: 'lucide:heart',
+      title: 'Give Back',
+      description: 'Trade your time to make the space more accessible for others.',
+    },
+  ],
+  roles: [
+    {
+      name: 'Host Volunteer',
+      hours: '16 hours/week',
+      timeSlots: 'Any time between 10am to midnight, in 4-hour blocks',
+      suitableFor: 'People who enjoy helping others and making spaces feel welcoming.',
+      duties: [
+        'Welcome visitors and day pass users',
+        'Give quick orientations to new users',
+        'Be the friendly point of contact',
+        'Help with co-working bookings',
+      ],
+    },
+    {
+      name: 'Maker Volunteer',
+      hours: '8 hours/week',
+      timeSlots: 'Weekday evenings or weekends, in 4-hour blocks',
+      suitableFor: 'Makers and tinkerers who can help maintain our tools and hardware space.',
+      duties: [
+        'Keep shared tools organized',
+        'Help with hardware room supervision',
+        'Guide safe tool usage',
+        'Assist with 3D printing',
+      ],
+    },
+  ],
+  expectations: [
+    {
+      icon: 'lucide:calendar-clock',
+      title: '2+ Month Commitment',
+      description: 'We ask for at least 2 months to get familiar with the space. We\'re flexible about exams and travel.',
+    },
+    {
+      icon: 'lucide:message-circle',
+      title: 'Use Telegram',
+      description: 'Stay available on Telegram during shifts and be generally responsive.',
+    },
+    {
+      icon: 'lucide:flag',
+      title: 'Report Issues',
+      description: 'Help maintain the space by reporting any problems you notice.',
+    },
+    {
+      icon: 'lucide:check-circle',
+      title: 'Be Responsible',
+      description: 'Schedule shifts in advance and be reliable with your commitments.',
+    },
+  ],
+};
+---
+
+<Layout title={volunteerData.title} description={volunteerData.description}>
+  <section class="w-full bg-white py-8 dark:bg-gray-800">
+    <div class="container mx-auto px-4 md:px-6">
+      <h1 class="mb-8 text-center text-3xl font-bold tracking-tighter text-red-600 dark:text-red-400 sm:text-5xl">
+        {volunteerData.heading}
+      </h1>
+      <p class="mx-auto mb-12 max-w-2xl text-center text-xl text-gray-600 dark:text-gray-300">
+        {volunteerData.description}
+      </p>
+
+      <div class="mb-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {volunteerData.generalFeatures.map((feature) => (
+          <div class="flex flex-col items-center rounded-lg bg-gray-50 p-6 text-center shadow-md dark:bg-gray-700">
+            <Icon name={feature.icon} class="mb-4 h-12 w-12 text-red-600 dark:text-red-400" />
+            <h3 class="mb-2 text-xl font-bold text-gray-800 dark:text-gray-200">
+              {feature.title}
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              {feature.description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mb-16 grid grid-cols-1 gap-8 lg:grid-cols-2">
+        {volunteerData.roles.map((role) => (
+          <div class="flex flex-col rounded-lg bg-gray-50 p-6 shadow-md dark:bg-gray-700">
+            <h3 class="mb-2 text-2xl font-bold text-red-600 dark:text-red-400">
+              {role.name}
+            </h3>
+            <p class="mb-2 text-xl font-semibold">
+              {role.hours}
+            </p>
+            <p class="mb-4 text-sm text-gray-600 dark:text-gray-300">
+              {role.timeSlots}
+            </p>
+            <p class="mb-4 text-gray-600 dark:text-gray-300">
+              {role.suitableFor}
+            </p>
+            <div class="mb-6 flex-grow">
+              <h4 class="mb-2 font-semibold text-gray-800 dark:text-gray-200">
+                What You'll Do:
+              </h4>
+              <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                {role.duties.map((duty) => (
+                  <li class="flex items-center">
+                    <Icon name="fa:check" class="mr-2 h-4 w-4 text-green-500" />
+                    <span>{duty}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mx-auto max-w-3xl">
+        <h2 class="mb-8 text-center text-2xl font-bold text-red-600 dark:text-red-400">
+          What We Expect
+        </h2>
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
+          {volunteerData.expectations.map((expectation) => (
+            <div class="flex flex-col items-start rounded-lg bg-gray-50 p-6 shadow-md dark:bg-gray-700">
+              <Icon name={expectation.icon} class="mb-4 h-8 w-8 text-red-600 dark:text-red-400" />
+              <h3 class="mb-2 text-lg font-bold text-gray-800 dark:text-gray-200">
+                {expectation.title}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                {expectation.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="mx-auto mt-16 max-w-2xl rounded-lg bg-gray-50 p-8 shadow-md dark:bg-gray-700">
+        <h2 class="mb-6 text-2xl font-bold text-red-600 dark:text-red-400">
+          How to Apply
+        </h2>
+        <ol class="list-decimal space-y-4 pl-5 text-gray-600 dark:text-gray-300">
+          <li>Message <strong>HackerspaceSG Admin</strong> on Telegram</li>
+          <li>Tell us about yourself and your availability</li>
+          <li>Come for a quick in-person chat</li>
+          <li>If it's a good fit, we'll onboard you and give you access to the Volunteer calendar</li>
+        </ol>
+        <p class="mt-6 text-sm text-gray-500 dark:text-gray-400">
+          This volunteer programme is new as of May 2025. We're still refining it and welcome feedback to help it work better for everyone.
+        </p>
+        <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+          * Unlimited access means at most 16 hours a day. You can't live here — though we get it if there's an occasional deadline.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
