@@ -1,6 +1,6 @@
 ---
 import * as config from '@/config.ts';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
 export interface Props {
   title?: string;
@@ -77,5 +77,5 @@ const pageDescription = description
   <meta property="twitter:description" content={pageDescription} />
   <meta property="twitter:url" content={canonicalURL} />
 
-  <ViewTransitions />
+  <ClientRouter />
 </head>

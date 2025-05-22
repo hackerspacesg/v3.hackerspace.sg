@@ -21,6 +21,9 @@ import remarkCustomHeaderId from 'remark-custom-header-id';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://hackerspace.sg',
+  experimental: {
+    preserveScriptOrder: true,
+  },
   integrations: [react(), mdx(), icon(), sitemap(), critters({})],
   markdown: {
     remarkPlugins: [remarkCustomHeaderId],
