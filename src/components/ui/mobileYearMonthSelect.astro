@@ -1,0 +1,42 @@
+---
+export interface Props<T> {
+  allYears: number[];
+  currentYear: number;
+  months: string[];
+  itemsByMonth: Record<string, { short: string; items: T[] }>;
+}
+
+const { allYears, currentYear, months, itemsByMonth } =
+  Astro.props as Props<unknown>;
+---
+
+<div class="sticky top-12 z-10 md:top-16 lg:hidden">
+  <div
+    class="block space-y-3 bg-white/80 py-3 backdrop-blur-sm dark:bg-zinc-900/80">
+    <select
+      class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-1.5 text-xl dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
+      onchange="if(this.value) window.location.href=this.value">
+      {
+        [...allYears].reverse().map((year) => (
+          <option value={`/events/${year}`} selected={year === currentYear}>
+            {year}
+          </option>
+        ))
+      }
+    </select>
+    {
+      currentYear && months.length > 0 && (
+        <select
+          class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-1.5 text-xl dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
+          onchange="if(this.value) window.location.href=this.value">
+          <option value="">Select Month</option>
+          {months.map((month) => (
+            <option value={`#${itemsByMonth[month].short.toLowerCase()}`}>
+              {month}
+            </option>
+          ))}
+        </select>
+      )
+    }
+  </div>
+</div>

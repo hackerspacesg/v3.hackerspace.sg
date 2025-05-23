@@ -1,11 +1,11 @@
 ## Visiting the space 👋
 
-_last updated: 23 Oct 2024_
+_last updated: 12 May 2025_
 
 HackerspaceSG is open 24/7 for members.
 
-If you'd like to visit the space or [join as a member](/membership), drop by during an upcoming event, email us with your preferred visiting dates and times at contact@hackerspace.sg (please follow up if we don't reply), or ask if someone can host you on our [Telegram group chat](https://t.me/HackerspaceSG).
+If you'd like to visit the space or [join as a member](/membership), drop by during [an upcoming event](/events), email us with your preferred visiting dates and times at contact@hackerspace.sg (please follow up if we don't reply), or ask if someone can host you on our [Telegram group chat](https://t.me/HackerspaceSG).
 
-We're currently in Move Mode and will vacate the current space on 13 December 2024 for a new one.
+We moved into our new space at **Textile Centre, #08-10** 4 months ago, so it's still a bit messy around these parts (welcome to a hackerspace?). However, if you aren't looking for a conventional co-working space, maybe HackerspaceSG is for you?
 
-Fill up the [HackerspaceSG 365](/365) form if you would like to pledge to support us!
+As a not-for-profit organisation, we depend heavily on community support to keep going. If you like what we do, fill up the [HackerspaceSG 365](/365) form if you would like to pledge to support us!
