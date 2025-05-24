@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  mentions: CollectionEntry<'mentions' | 'mentionExcerpts'>[];
+}
+
+const { mentions } = Astro.props;
+
+const nonEnglishMentions = mentions.filter((mention) => mention.data.language);
+---
+
+<div class="prose mx-8 my-8 md:mx-auto">
+  <h2>In other languages</h2>
+  <ul>
+    {
+      nonEnglishMentions.map((mention) => (
+        <li>
+          <a
+            href={`/mentions/${mention.data.slug}`}
+            class="text-lg text-red-800 no-underline hover:underline">
+            {mention.data.title}
+          </a>{' '}
+          ({mention.data.publication}, {mention.data.date.getDate()}{' '}
+          {mention.data.date.toLocaleString('en-US', { month: 'long' })}{' '}
+          {mention.data.date.getFullYear()})
+        </li>
+      ))
+    }
+  </ul>
+</div>

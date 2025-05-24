@@ -1,0 +1,48 @@
+---
+export interface Crumb {
+  label: string;
+  href?: string;
+  html?: boolean;
+}
+
+interface Props {
+  crumbs: Crumb[];
+}
+
+const { crumbs } = Astro.props;
+const crumbSymbol = '>';
+---
+
+<nav class="my-4 text-sm" aria-label="Breadcrumbs">
+  <ol class="flex list-none flex-wrap items-center gap-2 p-0">
+    <li class="whitespace-nowrap p-0">
+      <a
+        href="/"
+        class="text-gray-500 no-underline hover:text-gray-700 hover:underline"
+        title="127.0.0.1">Home</a
+      >
+    </li>
+    {
+      crumbs.map((crumb) => (
+        <li class="flex items-center gap-2">
+          <span class="text-gray-400" aria-hidden="true">
+            {crumbSymbol}
+          </span>
+          <span class="whitespace-nowrap">
+            {crumb.html ? (
+              <span class="text-gray-700" set:html={crumb.label} />
+            ) : crumb.href ? (
+              <a
+                href={crumb.href}
+                class="text-gray-500 no-underline hover:text-gray-700 hover:underline">
+                {crumb.label}
+              </a>
+            ) : (
+              <span class="text-gray-700">{crumb.label}</span>
+            )}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+</nav>

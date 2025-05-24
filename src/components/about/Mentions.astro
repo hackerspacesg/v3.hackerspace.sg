@@ -1,0 +1,80 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+
+interface Props {
+  mentions: CollectionEntry<'mentions' | 'mentionExcerpts'>[];
+}
+
+const { mentions } = Astro.props;
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    year: 'numeric',
+  });
+};
+
+const formatPublicationDate = (date: Date) => {
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = date.toLocaleDateString('en-US', { month: 'long' });
+  const year = date.getFullYear();
+  return `${day} ${month} ${year}`;
+};
+
+const getMentionUrl = (
+  mention: CollectionEntry<'mentions' | 'mentionExcerpts'>,
+) => {
+  return `/mentions/${mention.data.slug}`;
+};
+---
+
+<div class="mx-8 mb-8">
+  <div class="mx-auto flex max-w-5xl flex-wrap justify-evenly gap-8">
+    {
+      mentions
+        .filter((mention) => !mention.data.language)
+        .map(async (mention) => {
+        const { Content } = await render(mention);
+        const mentionUrl = getMentionUrl(mention);
+        return (
+          <div class="flex-shrink-0 flex-grow basis-80">
+            <h3 class="mb-4 text-lg font-semibold">
+              {formatDate(mention.data.date)}
+            </h3>
+            <div class="relative">
+              <blockquote class="prose mx-auto mb-4 max-h-96 overflow-y-auto border-l-4 border-gray-200 pl-4 pr-4 dark:prose-invert">
+                <Content />
+              </blockquote>
+              <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent dark:from-gray-900" />
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              —{' '}
+              <a
+                href={mentionUrl}
+                class="text-red-700 hover:text-red-600 dark:text-red-400">
+                {mention.data.publication}
+              </a>{' '}
+              ({formatPublicationDate(mention.data.date)})
+            </p>
+          </div>
+        );
+      })
+    }
+  </div>
+</div>
+
+<style>
+  blockquote::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  blockquote::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  blockquote::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 2px;
+  }
+</style>

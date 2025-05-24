@@ -15,6 +15,31 @@ const IndexCarousel = defineCollection({
     ),
 });
 
+const mentionsSchema = z.object({
+  title: z.string(),
+  author: z.string(),
+  date: z.date(),
+  publication: z.string(),
+  slug: z.string(),
+  language: z.string().optional(),
+});
+
+const mentions = defineCollection({
+  loader: glob({
+    pattern: '!(*-ex).md',
+    base: './src/content/mentions',
+  }),
+  schema: mentionsSchema,
+});
+
+const mentionExcerpts = defineCollection({
+  loader: glob({ pattern: '*ex.md', base: './src/content/mentions' }),
+  schema: mentionsSchema,
+});
+
 export const collections = {
   IndexCarousel,
+  mentions,
+  mentionExcerpts,
 };
+

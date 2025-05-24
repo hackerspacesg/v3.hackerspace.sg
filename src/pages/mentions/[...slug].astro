@@ -1,0 +1,42 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import MentionCard from '@/components/mentions/MentionCard.astro';
+import Breadcrumbs from '@/components/mentions/Breadcrumbs.astro';
+import slug from 'slug';
+import type { Crumb } from '@/components/mentions/Breadcrumbs.astro';
+
+interface Props {
+  mention: CollectionEntry<'mentions'>;
+}
+
+export async function getStaticPaths() {
+  const mentions = await getCollection('mentions');
+  return mentions.map((mention) => ({
+    params: { slug: mention.data.slug },
+    props: { mention },
+  }));
+}
+
+const { mention } = Astro.props;
+const publicationYear = mention.data.date.getFullYear();
+
+const crumbs: Crumb[] = [
+  { label: 'Media Mentions', href: '/mentions' },
+  {
+    label: `<a href="/mentions/${slug(mention.data.publication)}" class="text-gray-500 hover:text-gray-700 no-underline hover:underline">${mention.data.publication}</a> (<a href="/mentions/${publicationYear}" class="text-gray-500 hover:text-gray-700 no-underline hover:underline">${publicationYear}</a>)`,
+    html: true,
+  },
+  { label: mention.data.title },
+];
+---
+
+<Layout
+  title={mention.data.title}
+  description={`Media mention from ${mention.data.publication}`}>
+  <div class="prose mx-8 my-8 md:mx-auto">
+    <Breadcrumbs {crumbs} />
+    <MentionCard mention={mention} variant="single" showYear={true} />
+  </div>
+</Layout>

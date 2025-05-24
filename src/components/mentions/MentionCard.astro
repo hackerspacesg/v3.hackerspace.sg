@@ -1,0 +1,52 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import slug from 'slug';
+import { render } from 'astro:content';
+
+type MentionEntry = CollectionEntry<'mentions' | 'mentionExcerpts'>;
+
+interface Props {
+  mention: MentionEntry;
+  variant?: 'list' | 'single';
+  showYear?: boolean;
+}
+
+const { mention, variant = 'list', showYear = true } = Astro.props;
+const { Content } = await render(mention);
+
+const formattedDate = mention.data.date.toLocaleDateString('en-SG', {
+  day: 'numeric',
+  month: 'long',
+  ...(showYear && { year: 'numeric' }),
+});
+
+const mentionUrl = `/mentions/${mention.data.slug}`;
+const publicationUrl = `/mentions/${slug(mention.data.publication)}`;
+---
+
+<article {...mention.data.language && { lang: mention.data.language }}>
+  {
+    variant === 'list' ? (
+      <h2>
+        <a
+          href={mentionUrl}
+          class="font-bold text-red-700 no-underline hover:text-red-600 dark:text-red-400">
+          {mention.data.title}
+        </a>
+      </h2>
+    ) : (
+      <h1>{mention.data.title}</h1>
+    )
+  }
+
+  <div class="text-sm text-gray-600 dark:text-gray-400">
+    <a href={publicationUrl} class="no-underline hover:underline"
+      >{mention.data.publication}</a
+    >
+    {mention.data.author && ` · ${mention.data.author}`}
+    {' · '}
+    {formattedDate}
+  </div>
+
+  <Content />
+</article>
