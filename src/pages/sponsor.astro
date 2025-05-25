@@ -1,0 +1,188 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+
+const tiers = [
+  {
+    name: 'Silver',
+    price: '$3,000/year',
+    description: 'Perfect for small businesses looking to support innovation.',
+    features: [
+      'Logo on website',
+      '2 free memberships',
+      '5 event tickets',
+      'Small logo on event banners',
+      '',
+      '',
+    ],
+  },
+  {
+    name: 'Gold',
+    price: '$8,000/year',
+    description:
+      'Ideal for medium-sized companies wanting to engage with our community.',
+    features: [
+      'Prominent logo on website',
+      '5 free memberships',
+      '10 event tickets',
+      'Medium logo on event banners',
+      'Sponsored workshop opportunity',
+      '',
+    ],
+  },
+  {
+    name: 'Platinum',
+    price: '$12,000/year',
+    description:
+      'Best for large corporations seeking maximum visibility and involvement.',
+    features: [
+      'Featured logo on website',
+      '10 free memberships',
+      '20 event tickets',
+      'Large logo on event banners',
+      'Multiple sponsored workshop opportunities',
+      'Dedicated space for corporate events',
+    ],
+  },
+];
+
+const features = [
+  'Logo placement',
+  'Free memberships',
+  'Event tickets',
+  'Event banner presence',
+  'Sponsored workshops',
+  'Dedicated space',
+];
+
+const benefits = [
+  {
+    icon: 'lucide:eye',
+    title: 'Brand Visibility',
+    description: "Get your brand in front of Singapore's most innovative minds",
+  },
+  {
+    icon: 'lucide:users',
+    title: 'Talent Pipeline',
+    description: 'Connect with skilled individuals for potential recruitment',
+  },
+  {
+    icon: 'lucide:handshake',
+    title: 'Community Engagement',
+    description:
+      'Participate in events and workshops to engage with the tech community',
+  },
+  {
+    icon: 'lucide:lightbulb',
+    title: 'Innovation Access',
+    description:
+      'Stay at the forefront of technological advancements and trends',
+  },
+  {
+    icon: 'lucide:heart',
+    title: 'Corporate Social Responsibility',
+    description: 'Support STEM education and innovation in Singapore',
+  },
+  {
+    icon: 'lucide:network',
+    title: 'Networking Opportunities',
+    description: 'Connect with other industry leaders and potential partners',
+  },
+];
+---
+
+<Layout
+  title="Sponsor Us"
+  description="Support HackerspaceSG as an organisation with a Sponsorship.">
+  <section class="w-full bg-white py-12 dark:bg-gray-800 md:py-24 lg:py-32">
+    <div class="container mx-auto px-4 md:px-6">
+      <h1
+        class="mb-8 text-center text-3xl font-bold tracking-tighter text-red-600 dark:text-red-400 sm:text-5xl">
+        Sponsor Us
+      </h1>
+      <p
+        class="mx-auto mb-12 max-w-2xl text-center text-xl text-gray-600 dark:text-gray-300">
+        Support innovation and connect with the tech community in Singapore.
+        Your sponsorship helps us foster creativity, learning, and
+        entrepreneurship.
+      </p>
+      <div class="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
+        {
+          tiers.map((tier) => (
+            <div class="rounded-lg bg-gray-50 p-6 shadow-md dark:bg-gray-700">
+              <h3 class="mb-2 text-2xl font-bold text-red-600 dark:text-red-400">
+                {tier.name}
+              </h3>
+              <p class="mb-4 text-3xl font-bold">{tier.price}</p>
+              <p class="mb-6 text-gray-600 dark:text-gray-300">
+                {tier.description}
+              </p>
+              <button class="w-full rounded bg-red-600 px-4 py-2 font-semibold text-white hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800">
+                Choose {tier.name}
+              </button>
+            </div>
+          ))
+        }
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse text-gray-700 dark:text-gray-300">
+          <thead>
+            <tr class="bg-gray-200 dark:bg-gray-700">
+              <th class="p-4 text-left">Features</th>
+              {
+                tiers.map((tier) => (
+                  <th class="p-4 text-center">{tier.name}</th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              features.map((feature, featureIndex) => (
+                <tr class="border-b dark:border-gray-700">
+                  <td class="p-4">{feature}</td>
+                  {tiers.map((tier) => (
+                    <td class="p-4 text-center">
+                      {tier.features[featureIndex] ? (
+                        <span class="text-green-500 dark:text-green-400">
+                          {tier.features[featureIndex]}
+                        </span>
+                      ) : (
+                        <span class="text-red-500">-</span>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full bg-gray-200 py-12 dark:bg-gray-900 md:py-24 lg:py-32">
+    <div class="container mx-auto px-4 md:px-6">
+      <h2
+        class="mb-12 text-center text-3xl font-bold tracking-tighter text-red-600 dark:text-red-400 sm:text-4xl">
+        Why Sponsor HackerspaceSG?
+      </h2>
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {
+          benefits.map((benefit) => (
+            <div class="flex flex-col items-center text-center">
+              <Icon
+                name={benefit.icon}
+                class="mb-4 h-12 w-12 text-red-600 dark:text-red-400"
+              />
+              <h3 class="mb-2 text-xl font-bold">{benefit.title}</h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                {benefit.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

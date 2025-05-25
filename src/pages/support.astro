@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SupportUs from '@/components/support/chart';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+const benefits = [
+  'Access to exclusive events and workshops',
+  'Recognition on our website and social media',
+  'Priority booking for space and equipment',
+  'Invitations to supporter-only meetups',
+  'Opportunity to shape the future of HackerspaceSG',
+];
+---
+
+<Layout
+  title="Support HackerspaceSG"
+  description="Support us and get access to HackerspaceSG in the evenings!">
+  <main>
+    <section class="py-8">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="mb-4 text-4xl font-bold md:text-5xl">
+          Support HackerspaceSG
+        </h1>
+        <p class="mb-8 text-xl">
+          Help us keep the lights on and the innovation flowing!
+        </p>
+        <Button asChild>
+          <a href="#support-us" class="bg-white text-red-600 hover:bg-gray-100"
+            >Become a Supporter</a
+          >
+        </Button>
+      </div>
+    </section>
+
+    <SupportUs />
+
+    <section id="support-us" class="bg-white py-20 dark:bg-gray-800">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="mb-8 text-3xl font-bold dark:text-white">
+          Become a Supporter
+        </h2>
+        <p class="mx-auto mb-8 max-w-2xl text-xl dark:text-gray-300">
+          Your support helps us maintain our space, upgrade equipment, and
+          continue fostering innovation in Singapore's tech community.
+        </p>
+        <Card className="mx-auto mb-8 max-w-2xl">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold"
+              >Supporter Benefits</CardTitle
+            >
+          </CardHeader>
+          <CardContent>
+            <ul class="space-y-2 text-left">
+              {
+                benefits.map((benefit) => (
+                  <li class="flex items-start">
+                    <span class="mr-2 text-green-500">✓</span>
+                    <span class="dark:text-gray-300">{benefit}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </CardContent>
+        </Card>
+        <Button asChild>
+          <a
+            href="/365"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-red-600 text-white hover:bg-red-700">
+            Become a Supporter Now
+          </a>
+        </Button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Add any client-side JavaScript here if needed
+  </script>
+</Layout>
