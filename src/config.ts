@@ -1,6 +1,7 @@
 export const site = {
   title: 'HackerspaceSG',
-  description: "The Singapore tech scene's community centre.",
+  description:
+    "Singapore's hackerspace since 2009. A dollar a day keeps the hackerspace alive.",
   tagline: "the Singapore tech scene's community centre",
 };
 
@@ -8,10 +9,11 @@ export const header = {
   navbar: [
     { label: 'About', href: '/about', icon: 'fa:info-circle' },
     { label: 'Visit', href: '/visit', icon: 'fa:map-marker' },
+    { label: 'Support', href: '/support', icon: 'fa:heart' },
     { label: 'Membership', href: '/membership', icon: 'fa:users' },
     { label: 'Events', href: '/events', icon: 'fa:calendar' },
   ],
-  navcta: { label: 'Join Us', href: '/membership', icon: 'lucide:user-plus' },
+  navcta: { label: 'Support Us', href: '/support', icon: 'fa:heart' },
 };
 
 export const footer = {
@@ -39,8 +41,8 @@ export const footer = {
           icon: 'fa:handshake-o',
         },
         {
-          label: 'Volunteer',
-          href: '/volunteer',
+          label: 'Barter Membership',
+          href: '/barter',
           icon: 'fa:star',
         },
         {

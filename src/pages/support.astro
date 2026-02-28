@@ -1,82 +1,235 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import SupportUs from '@/components/support/chart';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const benefits = [
-  'Access to exclusive events and workshops',
-  'Recognition on our website and social media',
-  'Priority booking for space and equipment',
-  'Invitations to supporter-only meetups',
-  'Opportunity to shape the future of HackerspaceSG',
+  'Evening access during Hackerspace Hours (Tue & Thu, 7–11pm)',
+  'Your name on the Supporter Wall — physical and digital',
+  'Monthly update email with a photo from the space',
+  'A laptop sticker (hacker currency)',
+  "The knowledge that your dollar keeps Singapore's hackerspace alive",
 ];
+
+const costs = [
+  { label: 'Rent', amount: 2700, minutes: 42 },
+  { label: 'Utilities', amount: 250, minutes: 4 },
+  { label: 'Internet', amount: 101, minutes: 2 },
+  { label: 'Accounting', amount: 60, minutes: 1 },
+  { label: 'Corpsec', amount: 33.5, minutes: 0.5 },
+  { label: 'Aircon servicing', amount: 60, minutes: 1 },
+  { label: 'Insurance', amount: 100, minutes: 1.5 },
+  { label: 'Misc', amount: 100, minutes: 1.5 },
+];
+
+const totalExpenses = costs.reduce((sum, c) => sum + c.amount, 0);
+const currentRevenue = 1808;
+const gap = totalExpenses - currentRevenue;
+const supporterTarget = 100;
+// Update this number as supporters join
+const currentSupporters = 3;
 ---
 
 <Layout
   title="Support HackerspaceSG"
-  description="Support us and get access to HackerspaceSG in the evenings!">
+  description="Keep Singapore's hackerspace alive. $365/year. A dollar a day.">
   <main>
-    <section class="py-8">
-      <div class="container mx-auto px-4 text-center">
-        <h1 class="mb-4 text-4xl font-bold md:text-5xl">
-          Support HackerspaceSG
+    <!-- The Story -->
+    <section class="bg-zinc-50 py-16">
+      <div class="container mx-auto max-w-3xl px-4 text-center">
+        <h1 class="mb-6 text-4xl font-bold text-zinc-900 md:text-5xl">
+          Keep the hackerspace alive.
         </h1>
-        <p class="mb-8 text-xl">
-          Help us keep the lights on and the innovation flowing!
+        <p class="mb-4 text-xl leading-relaxed text-zinc-700">
+          For 16 years, HackerspaceSG has been where Singapore's hackers come
+          home. We've launched startups, built robots, argued about programming
+          languages, and drunk too much coffee.
+        </p>
+        <p class="mb-8 text-xl leading-relaxed text-zinc-700">
+          Now we need your help to keep the lights on.
         </p>
         <Button asChild>
-          <a href="#support-us" class="bg-white text-red-600 hover:bg-gray-100"
-            >Become a Supporter</a
-          >
+          <a
+            href="/365"
+            class="bg-red-600 px-8 py-4 text-lg text-white hover:bg-red-700">
+            Become a Supporter — $365/year
+          </a>
         </Button>
       </div>
     </section>
 
-    <SupportUs />
-
-    <section id="support-us" class="bg-white py-20 dark:bg-gray-800">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="mb-8 text-3xl font-bold dark:text-white">
-          Become a Supporter
+    <!-- The Gap -->
+    <section class="bg-white py-16 dark:bg-gray-800">
+      <div class="container mx-auto max-w-3xl px-4">
+        <h2
+          class="mb-8 text-center text-3xl font-bold text-zinc-900 dark:text-white">
+          The numbers
         </h2>
-        <p class="mx-auto mb-8 max-w-2xl text-xl dark:text-gray-300">
-          Your support helps us maintain our space, upgrade equipment, and
-          continue fostering innovation in Singapore's tech community.
-        </p>
-        <Card className="mx-auto mb-8 max-w-2xl">
+        <div class="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <Card>
+            <CardContent className="pt-6 text-center">
+              <p class="text-3xl font-bold text-red-600">
+                ${totalExpenses.toLocaleString()}
+              </p>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400">
+                monthly expenses
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="pt-6 text-center">
+              <p class="text-3xl font-bold text-zinc-900 dark:text-white">
+                ${currentRevenue.toLocaleString()}
+              </p>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400">
+                monthly revenue
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="pt-6 text-center">
+              <p class="text-3xl font-bold text-amber-600">
+                −${gap.toLocaleString()}
+              </p>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400">
+                monthly shortfall
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <!-- Cost breakdown -->
+        <Card className="mb-8">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold"
-              >Supporter Benefits</CardTitle
-            >
+            <CardTitle className="text-center text-xl">
+              Where the money goes
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <ul class="space-y-2 text-left">
+            <div class="space-y-3">
+              {
+                costs.map((cost) => (
+                  <div class="flex items-center justify-between">
+                    <span class="text-zinc-700 dark:text-zinc-300">
+                      {cost.label}
+                    </span>
+                    <span class="font-mono text-zinc-900 dark:text-white">
+                      ${cost.amount.toLocaleString()}
+                    </span>
+                  </div>
+                ))
+              }
+              <div
+                class="flex items-center justify-between border-t pt-3 font-bold">
+                <span>Total</span>
+                <span class="font-mono">${totalExpenses.toLocaleString()}</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <p class="text-center text-lg text-zinc-700 dark:text-zinc-300">
+          <strong>100 supporters × $1/day = $3,042/month.</strong> Combined with
+          membership revenue, that makes HackerspaceSG sustainable.
+        </p>
+      </div>
+    </section>
+
+    <!-- Supporter Progress -->
+    <section class="bg-zinc-50 py-16 dark:bg-gray-900">
+      <div class="container mx-auto max-w-3xl px-4 text-center">
+        <h2 class="mb-4 text-3xl font-bold text-zinc-900 dark:text-white">
+          Founding 100
+        </h2>
+        <p class="mb-8 text-zinc-600 dark:text-zinc-400">
+          Be one of the first 100 supporters. Your name on the wall — forever.
+        </p>
+        <div class="mx-auto mb-4 max-w-md">
+          <div class="mb-2 flex justify-between text-sm">
+            <span class="font-semibold text-zinc-700 dark:text-zinc-300">
+              {currentSupporters} supporters
+            </span>
+            <span class="text-zinc-500">{supporterTarget} goal</span>
+          </div>
+          <div
+            class="h-4 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
+            <div
+              class="h-full rounded-full bg-red-600 transition-all"
+              style={`width: ${Math.min((currentSupporters / supporterTarget) * 100, 100)}%`}
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What Your Dollar Buys -->
+    <section class="bg-white py-16 dark:bg-gray-800">
+      <div class="container mx-auto max-w-3xl px-4 text-center">
+        <h2 class="mb-4 text-3xl font-bold text-zinc-900 dark:text-white">
+          What your dollar buys
+        </h2>
+        <p class="mb-8 text-xl text-zinc-700 dark:text-zinc-300">
+          Your dollar pays for <strong>42 minutes of rent</strong>, 4 minutes of
+          electricity, and 2 minutes of internet. Together, 100 supporters keep
+          the lights on 24/7.
+        </p>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section id="support-us" class="bg-zinc-50 py-16 dark:bg-gray-900">
+      <div class="container mx-auto max-w-3xl px-4 text-center">
+        <h2 class="mb-8 text-3xl font-bold text-zinc-900 dark:text-white">
+          What you get
+        </h2>
+        <Card className="mx-auto mb-8 max-w-2xl">
+          <CardContent className="pt-6">
+            <ul class="space-y-3 text-left">
               {
                 benefits.map((benefit) => (
                   <li class="flex items-start">
-                    <span class="mr-2 text-green-500">✓</span>
-                    <span class="dark:text-gray-300">{benefit}</span>
+                    <span class="mr-3 text-green-500">✓</span>
+                    <span class="text-zinc-700 dark:text-zinc-300">
+                      {benefit}
+                    </span>
                   </li>
                 ))
               }
             </ul>
           </CardContent>
         </Card>
+        <p class="mb-8 text-zinc-600 dark:text-zinc-400">
+          It's OK to just be a supporter. You don't have to show up. Your $365
+          is enough. Thank you.
+        </p>
         <Button asChild>
           <a
             href="/365"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bg-red-600 text-white hover:bg-red-700">
-            Become a Supporter Now
+            class="bg-red-600 px-8 py-4 text-lg text-white hover:bg-red-700">
+            Become a Supporter — $365/year
           </a>
         </Button>
       </div>
     </section>
-  </main>
 
-  <script>
-    // Add any client-side JavaScript here if needed
-  </script>
+    <!-- Supporter Wall -->
+    <section class="bg-white py-16 dark:bg-gray-800">
+      <div class="container mx-auto max-w-3xl px-4 text-center">
+        <h2 class="mb-4 text-3xl font-bold text-zinc-900 dark:text-white">
+          Supporter Wall
+        </h2>
+        <p class="mb-8 text-zinc-600 dark:text-zinc-400">
+          These people keep HackerspaceSG alive.
+        </p>
+        <p class="text-zinc-500 italic">
+          Be the first name on the wall. <a
+            href="/365"
+            class="text-red-600 underline hover:text-red-700"
+            >Become a supporter.</a
+          >
+        </p>
+      </div>
+    </section>
+  </main>
 </Layout>
