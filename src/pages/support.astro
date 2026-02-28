@@ -109,13 +109,21 @@ const currentSupporters = 3;
             <div class="space-y-3">
               {
                 costs.map((cost) => (
-                  <div class="flex items-center justify-between">
-                    <span class="text-zinc-700 dark:text-zinc-300">
-                      {cost.label}
-                    </span>
-                    <span class="font-mono text-zinc-900 dark:text-white">
-                      ${cost.amount.toLocaleString()}
-                    </span>
+                  <div class="space-y-1">
+                    <div class="flex items-center justify-between text-sm">
+                      <span class="text-zinc-700 dark:text-zinc-300">
+                        {cost.label}
+                      </span>
+                      <span class="font-mono text-zinc-900 dark:text-white">
+                        ${cost.amount.toLocaleString()}
+                      </span>
+                    </div>
+                    <div class="h-2 w-full overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
+                      <div
+                        class="h-full rounded-full bg-red-500"
+                        style={`width: ${(cost.amount / totalExpenses) * 100}%`}
+                      ></div>
+                    </div>
                   </div>
                 ))
               }

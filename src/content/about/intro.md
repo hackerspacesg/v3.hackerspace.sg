@@ -1,9 +1,11 @@
 # About HackerspaceSG
 
-**HackerspaceSG** is Singapore's very own [Hackerspace](https://en.wikipedia.org/wiki/Hackerspace).
+**HackerspaceSG** is Singapore's first and longest-running [hackerspace](https://en.wikipedia.org/wiki/Hackerspace) — a community space where people interested in computers, technology, science, engineering, and digital and electronic art come together to meet, build, socialise, and collaborate.
 
-There are hundreds of such [hackerspaces](http://www.hackerspaces.org/) around the world, where people with common interests in computers, technology, science, engineering, and digital and electronic art, come together to meet, work, socialise and collaborate.
+Think of us as a [third place](https://en.wikipedia.org/wiki/Third_place) — not home, not work, but the place where you go to be around people who get you. A clubhouse for geeks.
 
-Built by and for geeks, nerds, inventors, engineers, and entrepreneurs, HackerspaceSG is the Singapore hacker community's home, living room and laboratory. Come hang out with the community in the evenings. Co-work with us during the day. We also host regular events, meetups, presentations, workshops, and movie nights for the local community.
+We're at **Textile Centre, #08-10** — 826 sqft on the 8th floor, split into four rooms. Cosy enough for about 20 people. Intimate, not spacious. We've gone from a charming shophouse (2009) to our smallest space ever, but the kampong doesn't need square footage — it needs people who show up.
 
-HackerspaceSG was also Singapore's first co-working space. Since then, many more have appeared. While members are still able to co-work at HackerspaceSG, we try to stick to our roots of primarily being a space for the communities we serve.
+Come hang out with the community during [Hackerspace Hours](/events) (Tue & Thu evenings). Co-work with us during the day. We also host regular meetups, presentations, and workshops for the local community.
+
+HackerspaceSG was also Singapore's first co-working space. Since then, many more have appeared. While members can still co-work here, we stick to our roots as a community space first.

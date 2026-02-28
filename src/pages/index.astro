@@ -11,6 +11,22 @@ import RecentTweets from '@/components/index/RecentTweets.astro';
   description="We are a community space for people interested in computers, technology, science, engineering, and digital and electronic art, to meet, work, socialise, and collaborate at.">
   <Hero />
   <Photos />
+  <!-- Supporter Progress -->
+  <section class="bg-white py-6 dark:bg-gray-800">
+    <div class="container mx-auto max-w-3xl px-4 text-center">
+      <div class="mx-auto max-w-md">
+        <p class="mb-2 text-lg font-semibold text-zinc-700 dark:text-zinc-300">
+          <span class="text-red-600">3</span>/100 supporters. <a href="/support" class="text-red-600 underline hover:text-red-700">Help us get there.</a>
+        </p>
+        <div class="h-3 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
+          <div class="h-full rounded-full bg-red-600 transition-all" style="width: 3%"></div>
+        </div>
+        <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+          100 supporters × $1/day = HackerspaceSG sustainable forever.
+        </p>
+      </div>
+    </div>
+  </section>
   <Announce />
   <section id="EventsTweets" class="bg-zinc-50 py-4 dark:bg-gray-900">
     <div class="container mx-auto">

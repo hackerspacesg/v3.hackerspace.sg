@@ -1,12 +1,15 @@
 # Visiting HackerspaceSG
 
-If you'd like to visit the space or [join as a member](/membership), drop by during an upcoming event, email us with your preferred visiting dates and times at contact@hackerspace.sg (please follow up if we don't reply), or ask if someone can host you on our [Telegram group chat](https://t.me/HackerspaceSG).
-
 We welcome potential members and supporters, as well as foreign travellers (bonus points if you're a member of another hackerspace).
 
-If you visit the space more than twice by appointment, please consider supporting us financially with either a membership or a supporter subscription, to help us pay our rent and bills.
+**Best times to visit:**
+- **First Tuesday** of every month — open night, anyone can drop in
+- **Hackerspace Hours** (Tue & Thu, 7–11pm) — guaranteed someone's hosting
+- During a [scheduled event](/events)
 
-If you want to use any of our desks or the hardware/electronics tools, you will need to buy a desk pass ($16) for the day.
+If you'd like to visit outside these times, ask on our [Telegram group chat](https://t.me/HackerspaceSG) or email contact@hackerspace.sg.
+
+If you want to use any of our desks or the hardware/electronics tools, you will need to buy a desk pass ($16) for the day. If you visit more than twice, please consider [supporting us](/support) — $1/day keeps the hackerspace alive.
 
 ## Location
 
