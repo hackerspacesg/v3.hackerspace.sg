@@ -42,7 +42,7 @@ If you have a private meeting or video call, you can book the meeting room throu
 
 The meeting room doesn't need to be booked if you don't mind others entering to access the pantry or fridge.
 
-To host a public or private event, email our Events team by following the instructions in our [handbook](https://docs.hackerspace.sg/handbook/hosting-events).
+To host a public or private event, email our Events team by following the instructions in our [handbook](https://docs.hackerspace.sg/handbook/hosting-events). Supporters hosting events need at least 4 supporters or members present.
 
 ### What does "unlimited hours" mean? {#unlimited}
 
