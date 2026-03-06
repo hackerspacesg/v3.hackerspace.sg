@@ -9,7 +9,7 @@ We welcome potential members and supporters, as well as foreign travellers (bonu
 
 If you'd like to visit outside these times, ask on our [Telegram group chat](https://t.me/HackerspaceSG) or email contact@hackerspace.sg.
 
-If you want to use any of our desks or the hardware/electronics tools, you will need to buy a desk pass ($16) for the day. If you visit more than twice, please consider [supporting us](/support) — $1/day keeps the hackerspace alive.
+If you want to use any of our desks or the hardware/electronics tools, you will need to buy a desk pass ($16) for the day. Desk pass access is by appointment only and depends on the availability of a member to host you — please arrange your visit in advance via [Telegram](https://t.me/HackerspaceSG) or email. If you visit more than twice, please consider [supporting us](/support) — $1/day keeps the hackerspace alive.
 
 ## Location
 

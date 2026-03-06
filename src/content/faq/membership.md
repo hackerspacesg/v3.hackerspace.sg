@@ -16,9 +16,11 @@ Your membership gets you 24/7 access to the space, so you can come anytime to wo
 
 ### What features does a membership provide over the other options? {#features}
 
-Only members get 24/7 access to the space, and the ability to purchase both shelf storage and lockers.
+Only members ($128/month and above) get 24/7 access to the space, access to the coworking room, and the ability to purchase add-ons like shelf storage, lockers, and business address subscriptions.
 
-If you are on our Supporter tier or a daily Desk Pass, you can't leave anything in the space when you leave for the day.
+Supporters ($365/year) get evening access from 7pm to 11pm daily. Supporters cannot purchase storage, lockers, or business address subscriptions. If you are on a daily Desk Pass, you can use the space during the day you purchased it.
+
+Neither supporters nor desk pass users can leave anything in the space when they leave for the day.
 
 ### Can I upgrade or downgrade my membership? {#change}
 
@@ -49,6 +51,8 @@ It means you can use the space 24/7! Just don’t spend more than 16 hours a day
 ### What is a Desk Pass? {#deskpass}
 
 A Desk Pass is for guests who use a desk or want access to our hardware/electronics room. It costs **$16** for the whole day. Members get 50% off for their guests. If a guest shares the desk that you're using, no pass is needed!
+
+Desk Pass access is by appointment only and depends on the availability of a Barter Member or other member willing to host. This is for security — all initial visits must be supervised by a member. We may introduce a verified tier in the future to allow unsupervised access, but onboarding always has to be conducted by a member first.
 
 ### Are there discounts for annual payments? {#annual}
 

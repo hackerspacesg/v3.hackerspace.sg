@@ -168,6 +168,57 @@ const membershipData = {
       dedicated: '$4,608',
     },
   ],
+  allTiersComparison: [
+    {
+      feature: 'Price',
+      supporter: '$365/year',
+      community: '$128/month',
+      coworking: '$256/month',
+      dedicated: '$512/month',
+    },
+    {
+      feature: 'Access hours',
+      supporter: '7pm–11pm daily',
+      community: '18hrs/week, 24/7',
+      coworking: 'Unlimited, 24/7',
+      dedicated: 'Unlimited, 24/7',
+    },
+    {
+      feature: 'Daytime access',
+      supporter: '❌',
+      community: '✅',
+      coworking: '✅',
+      dedicated: '✅',
+    },
+    {
+      feature: 'Coworking room',
+      supporter: '❌',
+      community: '✅',
+      coworking: '✅',
+      dedicated: '✅',
+    },
+    {
+      feature: 'Dedicated desk',
+      supporter: '❌',
+      community: '❌',
+      coworking: '❌',
+      dedicated: '✅',
+    },
+    {
+      feature: 'Storage & add-ons',
+      supporter: '❌',
+      community: '44L + purchasable',
+      coworking: '88L + purchasable',
+      dedicated: '176L + purchasable',
+    },
+    {
+      feature: 'Who it\'s for',
+      supporter: 'Believers',
+      community: 'After-work regulars',
+      coworking: 'Daily freelancers',
+      dedicated: 'Power users',
+    },
+  ],
   addOns: [
     { name: 'Shelf Storage', price: '$5 per 22L per month' },
     { name: 'Large Locker (42cm)', price: '$15 per month' },
@@ -265,6 +316,38 @@ const membershipData = {
         <div class="prose prose-sm max-w-none">
           <OtherTiers />
         </div>
+      </div>
+
+      <div class="mb-12 overflow-x-auto">
+        <h2
+          class="mb-6 text-center text-2xl font-bold text-red-600 dark:text-red-400">
+          All Tiers at a Glance
+        </h2>
+        <table
+          class="mx-auto w-full max-w-5xl border-collapse text-sm text-gray-700 dark:text-gray-300">
+          <thead>
+            <tr class="bg-gray-200 dark:bg-gray-700">
+              <th class="p-3 text-left"></th>
+              <th class="p-3 text-center">Supporter</th>
+              <th class="p-3 text-center">Community</th>
+              <th class="p-3 text-center">Co-working</th>
+              <th class="p-3 text-center">Dedicated</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              membershipData.allTiersComparison.map((row) => (
+                <tr class="border-b dark:border-gray-700">
+                  <td class="p-3 font-medium">{row.feature}</td>
+                  <td class="p-3 text-center">{row.supporter}</td>
+                  <td class="p-3 text-center">{row.community}</td>
+                  <td class="p-3 text-center">{row.coworking}</td>
+                  <td class="p-3 text-center">{row.dedicated}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
       </div>
 
       <div class="mb-12 overflow-x-auto">
